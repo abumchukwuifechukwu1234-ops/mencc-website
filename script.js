@@ -1924,109 +1924,135 @@ if (placeOrderButton) {
     }
 
 
-    /* =========================================================
-       WHATSAPP ORDER
-       ========================================================= */
+/* =========================================================
+   WHATSAPP ORDER
+   ========================================================= */
 
-    if (whatsappButton) {
+if (whatsappButton) {
 
-        whatsappButton.addEventListener(
-            "click",
-            function () {
+    whatsappButton.addEventListener(
+        "click",
+        function () {
 
-                const order =
-                    window.MENCCOrder;
-
-                if (!order) return;
+            const order =
+                window.MENCCOrder;
 
 
-                const selectedProducts =
-                    products.filter(function (product) {
+            const backendOrder =
+                order?.backendOrder;
 
-                        return (
+
+            if (!order || !backendOrder) {
+
+                alert(
+                    "Your order details could not be found. Please create your order again."
+                );
+
+                return;
+
+            }
+
+
+            /* =============================================
+               PRODUCTS
+            ============================================= */
+
+            const selectedProducts =
+                products.filter(function (product) {
+
+                    return (
+                        order.quantities[
+                            product.key
+                        ] > 0
+                    );
+
+                });
+
+
+            const productLines =
+                selectedProducts
+                    .map(function (product) {
+
+                        const quantity =
                             order.quantities[
                                 product.key
-                            ] > 0
-                        );
-
-                    });
+                            ];
 
 
-                const productLines =
-                    selectedProducts
-                        .map(function (product) {
+                        return `• ${product.name} × ${quantity}`;
 
-                            const quantity =
-                                order.quantities[
-                                    product.key
-                                ];
-
-                            const price =
-                                order.prices[
-                                    product.key
-                                ];
-
-                            const itemTotal =
-                                quantity * price;
+                    })
+                    .join("\n");
 
 
-                            return `• ${product.name} × ${quantity} — ₦${itemTotal.toLocaleString("en-NG")}`;
+            /* =============================================
+               REAL BACKEND ORDER DETAILS
+            ============================================= */
 
-                        })
-                        .join("\n");
-
-
-                const total =
-                    getOrderTotal();
+            const orderNumber =
+                backendOrder.orderNumber;
 
 
-                const orderNumber =
-                    confirmationOrderNumber?.textContent.trim() ||
-                    "#MENCC-ORDER";
+            const total =
+                Number(
+                    backendOrder.totalKobo
+                ) / 100;
 
 
-                const deliveryType =
-                    selectedDeliveryType?.textContent.trim() ||
-                    "Not specified";
+            /* =============================================
+               DELIVERY DETAILS
+            ============================================= */
+
+            const deliveryType =
+                selectedDeliveryType?.textContent.trim() ||
+                "Not specified";
 
 
-                const area =
-                    deliveryArea?.value.trim() ||
-                    "Not specified";
+            const area =
+                deliveryArea?.value.trim() ||
+                "Not specified";
 
 
-                const address =
-                    deliveryAddress?.value.trim() ||
-                    "Not specified";
+            const address =
+                deliveryAddress?.value.trim() ||
+                "Not specified";
 
 
-                const notes =
-                    deliveryNotes?.value.trim() ||
-                    "None";
+            const notes =
+                deliveryNotes?.value.trim() ||
+                "None";
 
 
-                const name =
-                    customerName?.value.trim() ||
-                    "Not provided";
+            /* =============================================
+               CUSTOMER DETAILS
+            ============================================= */
+
+            const name =
+                customerName?.value.trim() ||
+                "Not provided";
 
 
-                const phone =
-                    customerPhone?.value.trim() ||
-                    "Not provided";
+            const phone =
+                customerPhone?.value.trim() ||
+                "Not provided";
 
 
-                const email =
-                    customerEmail?.value.trim() ||
-                    "Not provided";
+            const email =
+                customerEmail?.value.trim() ||
+                "Not provided";
 
 
-                const message =
+            /* =============================================
+               WHATSAPP MESSAGE
+            ============================================= */
+
+            const message =
 
 `Hello MENCC,
 
-I'd like to place an order.
+I have created a new order through the MENCC website.
 
-ORDER: ${orderNumber}
+ORDER NUMBER: ${orderNumber}
 
 PRODUCTS
 ${productLines}
@@ -2036,7 +2062,7 @@ TOTAL
 
 DELIVERY
 Type: ${deliveryType}
-Area / City: ${area}
+Area: ${area}
 Address: ${address}
 Notes: ${notes}
 
@@ -2045,31 +2071,57 @@ Name: ${name}
 Phone: ${phone}
 Email: ${email}
 
+Please confirm my order.
+
 Thank you.`;
 
 
-                /*
-                 * Replace this with the official MENCC
-                 * WhatsApp number once confirmed.
-                 */
+            /* =============================================
+               MENCC WHATSAPP NUMBER
+            ============================================= */
 
-                const whatsappNumber =
-                    "2349077428155";
-
-
-                const whatsappURL =
-                    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            const whatsappNumber =
+                "2349077428155";
 
 
-                window.open(
-                    whatsappURL,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
+            const encodedMessage =
+    encodeURIComponent(message);
 
-            }
-        );
+
+/* Try to open the WhatsApp app directly */
+
+const whatsappAppURL =
+    `whatsapp://send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+
+/* Fallback if WhatsApp app is unavailable */
+
+const whatsappWebURL =
+    `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+
+/* Try opening WhatsApp directly */
+
+window.location.href =
+    whatsappAppURL;
+
+
+/* If the app does not open, use WhatsApp Web */
+
+setTimeout(() => {
+
+    if (!document.hidden) {
+
+        window.location.href =
+            whatsappWebURL;
 
     }
+
+}, 1500);
+
+        }
+    );
+
+}
 
 })();

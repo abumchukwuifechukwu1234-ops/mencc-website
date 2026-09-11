@@ -1784,10 +1784,13 @@ if (placeOrderButton) {
                    SEND ORDER TO MENCC BACKEND
                 ============================================= */
 
-                const response =
-                    await fetch(
-                        "/api/orders",
-                        {
+                const API_BASE_URL =
+    "https://mencc-website-1.onrender.com";
+
+const response =
+    await fetch(
+        `${API_BASE_URL}/api/orders`,
+        {
 
                             method:
                                 "POST",

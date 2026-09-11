@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const { Pool } = require("pg");
 const crypto = require("crypto");
 const path = require("path");
@@ -9,12 +10,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+const corsOptions = {
+    origin: "https://abumchukwuifechukwu1234-ops.github.io",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"]
+};
 
 /* =========================================================
    MIDDLEWARE
    ========================================================= */
 
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(
     express.static(
         path.join(__dirname, "..")

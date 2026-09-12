@@ -1779,82 +1779,127 @@ if (placeOrderButton) {
 
 
             try {
+/* =============================================
+   SEND ORDER DIRECTLY TO WHATSAPP
+============================================= */
 
-                /* =============================================
-                   SEND ORDER TO MENCC BACKEND
-                ============================================= */
-
-                const API_BASE_URL =
-    "https://mencc-website-1.onrender.com";
-
-const response =
-    await fetch(
-        `${API_BASE_URL}/api/orders`,
-        {
-
-                            method:
-                                "POST",
+placeOrderButton.textContent =
+    "Opening WhatsApp...";
 
 
-                            headers: {
+/* PRODUCTS */
 
-                                "Content-Type":
-                                    "application/json"
+const selectedProducts =
+    products.filter(function (product) {
 
-                            },
+        return (
+            order.quantities[product.key] > 0
+        );
 
-
-                            body:
-                                JSON.stringify(
-                                    orderData
-                                )
-
-                        }
-                    );
+    });
 
 
-                const data =
-                    await response.json();
+const productLines =
+    selectedProducts
+        .map(function (product) {
+
+            const quantity =
+                order.quantities[product.key];
+
+            const itemTotal =
+                quantity *
+                order.prices[product.key];
+
+            return `• ${product.name} × ${quantity} — ₦${itemTotal.toLocaleString("en-NG")}`;
+
+        })
+        .join("\n");
 
 
-                /* =============================================
-                   HANDLE BACKEND ERRORS
-                ============================================= */
+/* TOTAL */
 
-                if (
-                    !response.ok ||
-                    !data.success
-                ) {
-
-                    throw new Error(
-
-                        data.message ||
-
-                        "Unable to create your order."
-
-                    );
-
-                }
+const total =
+    getOrderTotal();
 
 
-                /* =============================================
-                   SAVE REAL BACKEND ORDER
-                ============================================= */
+/* CUSTOMER DETAILS */
 
-                window.MENCCOrder.backendOrder =
-                    data.order;
+const name =
+    customerName?.value.trim() ||
+    "Not provided";
 
 
-                /* =============================================
-                   SHOW CONFIRMATION
+const phone =
+    customerPhone?.value.trim() ||
+    "Not provided";
 
-                   IMPORTANT:
-                   The order now exists in PostgreSQL.
-                ============================================= */
 
-                showConfirmation(
-                    data.order
-                );
+const email =
+    customerEmail?.value.trim() ||
+    "Not provided";
+
+
+/* DELIVERY DETAILS */
+
+const area =
+    deliveryArea?.value.trim() ||
+    "Not specified";
+
+
+const address =
+    deliveryAddress?.value.trim() ||
+    "Not specified";
+
+
+const notes =
+    deliveryNotes?.value.trim() ||
+    "None";
+
+
+/* WHATSAPP MESSAGE */
+
+const message =
+
+`Hello MENCC! 👋
+
+🛒 NEW ORDER
+
+📦 ORDER DETAILS
+${productLines}
+
+💰 TOTAL
+₦${total.toLocaleString("en-NG")}
+
+🚚 DELIVERY DETAILS
+Type: ${deliveryType}
+Area: ${area}
+Address: ${address}
+Notes: ${notes}
+
+👤 CUSTOMER DETAILS
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+
+Please confirm my order.
+
+Thank you!`;
+
+
+/* MENCC WHATSAPP NUMBER */
+
+const whatsappNumber =
+    "2349077428155";
+
+
+/* OPEN WHATSAPP */
+
+const whatsappURL =
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+
+window.location.href =
+    whatsappURL;
 
 
             } catch (error) {
@@ -1925,206 +1970,5 @@ const response =
         );
 
     }
-
-
-/* =========================================================
-   WHATSAPP ORDER
-   ========================================================= */
-
-if (whatsappButton) {
-
-    whatsappButton.addEventListener(
-        "click",
-        function () {
-
-            const order =
-                window.MENCCOrder;
-
-
-            const backendOrder =
-                order?.backendOrder;
-
-
-            if (!order || !backendOrder) {
-
-                alert(
-                    "Your order details could not be found. Please create your order again."
-                );
-
-                return;
-
-            }
-
-
-            /* =============================================
-               PRODUCTS
-            ============================================= */
-
-            const selectedProducts =
-                products.filter(function (product) {
-
-                    return (
-                        order.quantities[
-                            product.key
-                        ] > 0
-                    );
-
-                });
-
-
-            const productLines =
-                selectedProducts
-                    .map(function (product) {
-
-                        const quantity =
-                            order.quantities[
-                                product.key
-                            ];
-
-
-                        return `• ${product.name} × ${quantity}`;
-
-                    })
-                    .join("\n");
-
-
-            /* =============================================
-               REAL BACKEND ORDER DETAILS
-            ============================================= */
-
-            const orderNumber =
-                backendOrder.orderNumber;
-
-
-            const total =
-                Number(
-                    backendOrder.totalKobo
-                ) / 100;
-
-
-            /* =============================================
-               DELIVERY DETAILS
-            ============================================= */
-
-            const deliveryType =
-                selectedDeliveryType?.textContent.trim() ||
-                "Not specified";
-
-
-            const area =
-                deliveryArea?.value.trim() ||
-                "Not specified";
-
-
-            const address =
-                deliveryAddress?.value.trim() ||
-                "Not specified";
-
-
-            const notes =
-                deliveryNotes?.value.trim() ||
-                "None";
-
-
-            /* =============================================
-               CUSTOMER DETAILS
-            ============================================= */
-
-            const name =
-                customerName?.value.trim() ||
-                "Not provided";
-
-
-            const phone =
-                customerPhone?.value.trim() ||
-                "Not provided";
-
-
-            const email =
-                customerEmail?.value.trim() ||
-                "Not provided";
-
-
-            /* =============================================
-               WHATSAPP MESSAGE
-            ============================================= */
-
-            const message =
-
-`Hello MENCC,
-
-I have created a new order through the MENCC website.
-
-ORDER NUMBER: ${orderNumber}
-
-PRODUCTS
-${productLines}
-
-TOTAL
-₦${total.toLocaleString("en-NG")}
-
-DELIVERY
-Type: ${deliveryType}
-Area: ${area}
-Address: ${address}
-Notes: ${notes}
-
-CUSTOMER
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
-
-Please confirm my order.
-
-Thank you.`;
-
-
-            /* =============================================
-               MENCC WHATSAPP NUMBER
-            ============================================= */
-
-            const whatsappNumber =
-                "2349077428155";
-
-
-            const encodedMessage =
-    encodeURIComponent(message);
-
-
-/* Try to open the WhatsApp app directly */
-
-const whatsappAppURL =
-    `whatsapp://send?phone=${whatsappNumber}&text=${encodedMessage}`;
-
-
-/* Fallback if WhatsApp app is unavailable */
-
-const whatsappWebURL =
-    `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-
-/* Try opening WhatsApp directly */
-
-window.location.href =
-    whatsappAppURL;
-
-
-/* If the app does not open, use WhatsApp Web */
-
-setTimeout(() => {
-
-    if (!document.hidden) {
-
-        window.location.href =
-            whatsappWebURL;
-
-    }
-
-}, 1500);
-
-        }
-    );
-
-}
 
 })();

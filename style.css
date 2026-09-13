@@ -8650,3 +8650,663 @@ section {
 [hidden] {
     display: none !important;
 }
+/* =========================================================
+   MENCC — PREMIUM WHATSAPP BUTTON
+   ========================================================= */
+
+#step4 .payment-whatsapp {
+
+    position: relative;
+
+    overflow: visible;
+
+    width: 100%;
+
+    min-height: 88px;
+
+    display: grid;
+
+    grid-template-columns:
+        58px
+        minmax(0, 1fr)
+        34px;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 14px 20px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid
+        rgba(79, 255, 146, 0.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12, 190, 82, 0.96),
+            rgba(4, 126, 50, 0.96)
+        );
+
+    box-shadow:
+
+        0 0 15px
+        rgba(35, 255, 116, 0.55),
+
+        0 0 35px
+        rgba(35, 255, 116, 0.35),
+
+        0 0 70px
+        rgba(35, 255, 116, 0.20);
+
+    animation:
+        whatsappButtonGlow
+        2.2s ease-in-out
+        infinite;
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease;
+
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON HOVER
+--------------------------------------------------------- */
+
+#step4 .payment-whatsapp:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.01);
+
+    box-shadow:
+
+        0 0 20px
+        rgba(35, 255, 116, 0.8),
+
+        0 0 45px
+        rgba(35, 255, 116, 0.5),
+
+        0 0 90px
+        rgba(35, 255, 116, 0.3);
+
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON CLICK
+--------------------------------------------------------- */
+
+#step4 .payment-whatsapp:active {
+
+    transform:
+        scale(0.98);
+
+}
+
+
+/* =========================================================
+   WHATSAPP ICON CONTAINER
+   ========================================================= */
+
+#step4 .payment-whatsapp
+.whatsapp-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    min-width: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.18);
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+
+        0 0 15px
+        rgba(255, 255, 255, 0.30),
+
+        0 0 25px
+        rgba(35, 255, 116, 0.45);
+
+    animation:
+
+        whatsappIconBounce
+        1.3s ease-in-out
+        infinite;
+
+}
+
+
+/* ---------------------------------------------------------
+   WHATSAPP SVG
+--------------------------------------------------------- */
+
+#step4 .payment-whatsapp
+.whatsapp-icon svg {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: block;
+
+    filter:
+
+        drop-shadow(
+            0 2px 5px
+            rgba(0, 0, 0, 0.15)
+        );
+
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+#step4 .payment-whatsapp
+.payment-option-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 0;
+
+}
+
+
+#step4 .payment-whatsapp
+.payment-option-content strong {
+
+    color: #ffffff;
+
+    font-size: clamp(
+        0.95rem,
+        2vw,
+        1.15rem
+    );
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    letter-spacing: 0.01em;
+
+}
+
+
+#step4 .payment-whatsapp
+.payment-option-content small {
+
+    margin-top: 5px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.82
+        );
+
+    font-size:
+        clamp(
+            0.68rem,
+            1.5vw,
+            0.8rem
+        );
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+#step4 .payment-whatsapp
+.payment-option-arrow {
+
+    color: #ffffff;
+
+    font-size: 2rem;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    transition:
+
+        transform 0.3s ease;
+
+}
+
+
+#step4 .payment-whatsapp:hover
+.payment-option-arrow {
+
+    transform:
+        translateX(6px);
+
+}
+
+
+/* =========================================================
+   GLOWING WAVES
+   ========================================================= */
+
+.whatsapp-wave {
+
+    position: absolute;
+
+    top: 50%;
+
+    width: 14px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    border:
+
+        3px solid
+        rgba(67, 255, 135, 0.9);
+
+    transform:
+        translateY(-50%);
+
+    pointer-events: none;
+
+    animation:
+
+        whatsappWave
+        1.6s ease-in-out
+        infinite;
+
+}
+
+
+.whatsapp-wave-left {
+
+    left: -25px;
+
+    border-right: 0;
+
+}
+
+
+.whatsapp-wave-right {
+
+    right: -25px;
+
+    border-left: 0;
+
+}
+
+
+.whatsapp-wave-left::before,
+.whatsapp-wave-right::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 5px;
+
+    width: 10px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    border:
+
+        2px solid
+        rgba(67, 255, 135, 0.65);
+
+    animation:
+
+        whatsappWave
+        1.6s ease-in-out
+        infinite;
+
+}
+
+
+.whatsapp-wave-left::before {
+
+    left: -12px;
+
+    border-right: 0;
+
+}
+
+
+.whatsapp-wave-right::before {
+
+    right: -12px;
+
+    border-left: 0;
+
+}
+
+
+/* =========================================================
+   BUTTON GLOW ANIMATION
+   ========================================================= */
+
+@keyframes whatsappButtonGlow {
+
+    0% {
+
+        box-shadow:
+
+            0 0 12px
+            rgba(35, 255, 116, 0.40),
+
+            0 0 30px
+            rgba(35, 255, 116, 0.22),
+
+            0 0 55px
+            rgba(35, 255, 116, 0.12);
+
+    }
+
+
+    50% {
+
+        box-shadow:
+
+            0 0 22px
+            rgba(35, 255, 116, 0.75),
+
+            0 0 50px
+            rgba(35, 255, 116, 0.45),
+
+            0 0 100px
+            rgba(35, 255, 116, 0.28);
+
+    }
+
+
+    100% {
+
+        box-shadow:
+
+            0 0 12px
+            rgba(35, 255, 116, 0.40),
+
+            0 0 30px
+            rgba(35, 255, 116, 0.22),
+
+            0 0 55px
+            rgba(35, 255, 116, 0.12);
+
+    }
+
+}
+
+
+/* =========================================================
+   WHATSAPP ICON BOUNCE
+   ========================================================= */
+
+@keyframes whatsappIconBounce {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateY(-7px)
+            scale(1.08);
+
+    }
+
+}
+
+
+/* =========================================================
+   WAVES ANIMATION
+   ========================================================= */
+
+@keyframes whatsappWave {
+
+    0% {
+
+        opacity: 0.35;
+
+        transform:
+            translateY(-50%)
+            scale(0.85);
+
+    }
+
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-50%)
+            scale(1.1);
+
+    }
+
+
+    100% {
+
+        opacity: 0.35;
+
+        transform:
+            translateY(-50%)
+            scale(0.85);
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #step4 .payment-whatsapp {
+
+        min-height: 82px;
+
+        padding:
+            13px
+            18px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .whatsapp-icon {
+
+        width: 52px;
+
+        height: 52px;
+
+        min-width: 52px;
+
+    }
+
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    #step4 .payment-whatsapp {
+
+        min-height: 76px;
+
+        grid-template-columns:
+
+            46px
+            minmax(0, 1fr)
+            28px;
+
+        gap: 12px;
+
+        padding:
+            12px
+            14px;
+
+        border-radius: 17px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .whatsapp-icon {
+
+        width: 46px;
+
+        height: 46px;
+
+        min-width: 46px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .whatsapp-icon svg {
+
+        width: 27px;
+
+        height: 27px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .payment-option-arrow {
+
+        font-size: 1.6rem;
+
+    }
+
+
+    .whatsapp-wave {
+
+        display: none;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    #step4 .payment-whatsapp {
+
+        grid-template-columns:
+
+            42px
+            minmax(0, 1fr)
+            24px;
+
+        gap: 10px;
+
+        padding:
+            10px
+            11px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .whatsapp-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+        min-width: 42px;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .payment-option-content strong {
+
+        font-size: 0.85rem;
+
+    }
+
+
+    #step4 .payment-whatsapp
+    .payment-option-content small {
+
+        font-size: 0.62rem;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION FOR ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #step4 .payment-whatsapp,
+
+    #step4 .payment-whatsapp
+    .whatsapp-icon,
+
+    .whatsapp-wave,
+
+    .whatsapp-wave::before {
+
+        animation: none;
+
+    }
+
+}

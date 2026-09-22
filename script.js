@@ -7,6 +7,83 @@ const SUPABASE_PUBLISHABLE_KEY =
 const MENCC_WHATSAPP_NUMBER = "2349077428155";
 
 window.addEventListener("DOMContentLoaded", () => {
+        /* =========================================================
+       DARK MODE
+       ========================================================= */
+
+    const themeToggle = document.querySelector(".theme-toggle");
+    const mobileThemeToggle = document.querySelector(".mobile-theme-toggle");
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem("mencc-theme");
+
+    if (savedTheme === "dark") {
+        root.dataset.theme = "dark";
+    }
+
+    const syncThemeControls = () => {
+        const isDark = root.dataset.theme === "dark";
+
+        const label = isDark
+            ? "Switch to light mode"
+            : "Switch to dark mode";
+
+        [themeToggle, mobileThemeToggle].forEach((button) => {
+            if (!button) return;
+
+            button.setAttribute("aria-pressed", String(isDark));
+            button.setAttribute("aria-label", label);
+            button.setAttribute("title", label);
+        });
+
+        const desktopIcon = themeToggle?.querySelector(".theme-icon");
+
+        if (desktopIcon) {
+            desktopIcon.textContent = isDark ? "☀" : "☾";
+        }
+
+        const mobileIcon =
+            mobileThemeToggle?.querySelector(".mobile-theme-icon");
+
+        if (mobileIcon) {
+            mobileIcon.textContent = isDark ? "☀" : "☾";
+        }
+
+        const mobileLabel =
+            mobileThemeToggle?.querySelector(".mobile-theme-label");
+
+        if (mobileLabel) {
+            mobileLabel.textContent = isDark
+                ? "Light mode"
+                : "Dark mode";
+        }
+    };
+
+    const setTheme = (theme) => {
+        if (theme === "dark") {
+            root.dataset.theme = "dark";
+            localStorage.setItem("mencc-theme", "dark");
+        } else {
+            root.removeAttribute("data-theme");
+            localStorage.setItem("mencc-theme", "light");
+        }
+
+        syncThemeControls();
+    };
+
+    const toggleTheme = () => {
+        setTheme(
+            root.dataset.theme === "dark"
+                ? "light"
+                : "dark"
+        );
+    };
+
+    themeToggle?.addEventListener("click", toggleTheme);
+
+    mobileThemeToggle?.addEventListener("click", toggleTheme);
+
+    syncThemeControls();
     const body = document.body;
     const pageLoader = document.getElementById("pageLoader");
     const siteHeader = document.getElementById("siteHeader");
@@ -444,37 +521,22 @@ window.setTimeout(hideLoader, 4000);
     let rafId = null;
 
 
-    const animateParallax = () => {
-
+  const animateParallax = () => {
     document
-        .querySelectorAll(
-            '[data-parallax-active="true"]'
-        )
-        .forEach(
-            (image) => {
+        .querySelectorAll('[data-parallax-active="true"]')
+        .forEach((image) => {
 
-                /*
-                 * HERO IMAGE
-                 * -------------------------------------------------
-                 * The hero is now a responsive 3:2 artwork.
-                 * Do not scale, translate, or crop it.
-                 */
-                if (
-                    image.classList.contains("hero-image")
-                ) {
-                    image.style.transform = "none";
-                    return;
-                }
-
-                /*
-                 * Other website imagery keeps its
-                 * existing subtle parallax behavior.
-                 */
-                image.style.transform =
-                    `scale(1.035) translate(${pointerX * 1.1}px, ${pointerY * 1.1}px)`;
-
+            if (
+                image.classList.contains("hero-image") ||
+                image.closest(".source-media")
+            ) {
+                image.style.transform = "none";
+                return;
             }
-        );
+
+            image.style.transform =
+                `scale(1.035) translate(${pointerX * 1.1}px, ${pointerY * 1.1}px)`;
+        });
 
     rafId = null;
 };

@@ -1565,3 +1565,319 @@ body.order-success-open {
     }
 
 }
+/* =========================================================
+   MENCC DARK MODE
+   ========================================================= */
+
+:root {
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --navy-950: #f5fbff;
+    --navy-900: #eaf7fc;
+    --navy-800: #d9edf5;
+
+    --white: #07151d;
+    --off-white: #0b1d27;
+
+    --aqua-50: #102d39;
+    --aqua-100: #123847;
+    --aqua-200: #17495a;
+    --aqua-300: #69d7ff;
+    --aqua-400: #49c7f5;
+    --aqua-500: #36b8e8;
+
+    --text-dark: #f4fbff;
+    --text-light: #b9d0da;
+
+    background: #061117;
+}
+
+:root[data-theme="dark"] body {
+    background: #061117;
+    color: #f4fbff;
+}
+
+/* ---------- Header ---------- */
+
+:root[data-theme="dark"] .site-header {
+    background: rgba(6, 17, 23, 0.96);
+    border-bottom-color: rgba(105, 215, 255, 0.15);
+}
+
+:root[data-theme="dark"] .site-header a {
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] .site-header a:hover {
+    color: #69d7ff;
+}
+
+/* ---------- Theme toggle ---------- */
+
+.theme-toggle,
+.mobile-theme-toggle {
+    border: 1px solid rgba(105, 215, 255, 0.35);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        border-color .3s ease;
+}
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.theme-toggle:hover,
+.mobile-theme-toggle:hover {
+    background: rgba(105, 215, 255, 0.12);
+    border-color: #69d7ff;
+    transform: translateY(-2px);
+}
+
+.theme-toggle:active,
+.mobile-theme-toggle:active {
+    transform: scale(.96);
+}
+
+.theme-icon {
+    display: block;
+    line-height: 1;
+}
+
+/* ---------- Mobile theme button ---------- */
+
+.mobile-theme-toggle {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.mobile-theme-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* ---------- Main sections ---------- */
+
+:root[data-theme="dark"] section {
+    background-color: #061117;
+}
+
+:root[data-theme="dark"] .section-heading,
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4 {
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] p {
+    color: #b9d0da;
+}
+
+/* ---------- Cards ---------- */
+
+:root[data-theme="dark"] .product-card,
+:root[data-theme="dark"] .feature-card,
+:root[data-theme="dark"] .info-card,
+:root[data-theme="dark"] .review-card,
+:root[data-theme="dark"] .order-card {
+    background: #0b1d27;
+    border-color: rgba(105, 215, 255, 0.14);
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] .product-card:hover,
+:root[data-theme="dark"] .feature-card:hover {
+    border-color: rgba(105, 215, 255, 0.4);
+}
+
+/* ---------- Collection / product area ---------- */
+
+:root[data-theme="dark"] .collections-section,
+:root[data-theme="dark"] .products-section {
+    background: #071820;
+}
+
+:root[data-theme="dark"] .product-content {
+    background: #0b1d27;
+}
+
+:root[data-theme="dark"] .product-card p,
+:root[data-theme="dark"] .product-card span {
+    color: #b9d0da;
+}
+
+/* ---------- Source section ---------- */
+
+:root[data-theme="dark"] .source-section {
+    background: #061117;
+}
+
+:root[data-theme="dark"] .source-copy {
+    color: #f4fbff;
+}
+
+/* ---------- Factory section ---------- */
+
+:root[data-theme="dark"] .factory-section {
+    background: #081a23;
+}
+
+:root[data-theme="dark"] .factory-content {
+    color: #f4fbff;
+}
+
+/* ---------- Buttons ---------- */
+
+:root[data-theme="dark"] .btn-secondary {
+    background: transparent;
+    color: #f4fbff;
+    border-color: rgba(105, 215, 255, 0.45);
+}
+
+:root[data-theme="dark"] .btn-secondary:hover {
+    background: rgba(105, 215, 255, 0.12);
+    color: #69d7ff;
+}
+
+/* ---------- Forms ---------- */
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+    background: #0b1d27;
+    color: #f4fbff;
+    border-color: rgba(105, 215, 255, 0.2);
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+    color: #78909c;
+}
+
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] textarea:focus,
+:root[data-theme="dark"] select:focus {
+    border-color: #69d7ff;
+    outline-color: rgba(105, 215, 255, 0.2);
+}
+
+/* ---------- Order drawer ---------- */
+
+:root[data-theme="dark"] .order-drawer {
+    background: #061117;
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] .order-drawer-inner {
+    background: #081a23;
+}
+
+:root[data-theme="dark"] .order-close {
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] .order-step,
+:root[data-theme="dark"] .order-summary {
+    background: #0b1d27;
+    border-color: rgba(105, 215, 255, 0.15);
+}
+
+/* ---------- Mobile menu ---------- */
+
+:root[data-theme="dark"] .mobile-menu {
+    background: #061117;
+}
+
+:root[data-theme="dark"] .mobile-menu-content {
+    background: #081a23;
+}
+
+:root[data-theme="dark"] .mobile-menu a {
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] .mobile-menu a:hover {
+    color: #69d7ff;
+}
+
+/* ---------- Footer ---------- */
+
+:root[data-theme="dark"] footer {
+    background: #02090d;
+    color: #b9d0da;
+}
+
+:root[data-theme="dark"] footer h3,
+:root[data-theme="dark"] footer h4 {
+    color: #f4fbff;
+}
+
+:root[data-theme="dark"] footer a {
+    color: #b9d0da;
+}
+
+:root[data-theme="dark"] footer a:hover {
+    color: #69d7ff;
+}
+
+/* ---------- General borders ---------- */
+
+:root[data-theme="dark"] hr {
+    border-color: rgba(105, 215, 255, 0.12);
+}
+
+/* ---------- Selection ---------- */
+
+:root[data-theme="dark"] ::selection {
+    background: #69d7ff;
+    color: #061117;
+}
+
+/* ---------- Smooth theme transition ---------- */
+
+body,
+.site-header,
+section,
+.product-card,
+.feature-card,
+.info-card,
+.review-card,
+.order-drawer,
+.order-drawer-inner,
+.mobile-menu,
+.mobile-menu-content,
+input,
+textarea,
+select,
+footer {
+    transition:
+        background-color .35s ease,
+        color .35s ease,
+        border-color .35s ease;
+}

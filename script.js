@@ -7,83 +7,7 @@ const SUPABASE_PUBLISHABLE_KEY =
 const MENCC_WHATSAPP_NUMBER = "2349077428155";
 
 window.addEventListener("DOMContentLoaded", () => {
-        /* =========================================================
-       DARK MODE
-       ========================================================= */
-
-    const themeToggle = document.querySelector(".theme-toggle");
-    const mobileThemeToggle = document.querySelector(".mobile-theme-toggle");
-    const root = document.documentElement;
-
-    const savedTheme = localStorage.getItem("mencc-theme");
-
-    if (savedTheme === "dark") {
-        root.dataset.theme = "dark";
-    }
-
-    const syncThemeControls = () => {
-        const isDark = root.dataset.theme === "dark";
-
-        const label = isDark
-            ? "Switch to light mode"
-            : "Switch to dark mode";
-
-        [themeToggle, mobileThemeToggle].forEach((button) => {
-            if (!button) return;
-
-            button.setAttribute("aria-pressed", String(isDark));
-            button.setAttribute("aria-label", label);
-            button.setAttribute("title", label);
-        });
-
-        const desktopIcon = themeToggle?.querySelector(".theme-icon");
-
-        if (desktopIcon) {
-            desktopIcon.textContent = isDark ? "☀" : "☾";
-        }
-
-        const mobileIcon =
-            mobileThemeToggle?.querySelector(".mobile-theme-icon");
-
-        if (mobileIcon) {
-            mobileIcon.textContent = isDark ? "☀" : "☾";
-        }
-
-        const mobileLabel =
-            mobileThemeToggle?.querySelector(".mobile-theme-label");
-
-        if (mobileLabel) {
-            mobileLabel.textContent = isDark
-                ? "Light mode"
-                : "Dark mode";
-        }
-    };
-
-    const setTheme = (theme) => {
-        if (theme === "dark") {
-            root.dataset.theme = "dark";
-            localStorage.setItem("mencc-theme", "dark");
-        } else {
-            root.removeAttribute("data-theme");
-            localStorage.setItem("mencc-theme", "light");
-        }
-
-        syncThemeControls();
-    };
-
-    const toggleTheme = () => {
-        setTheme(
-            root.dataset.theme === "dark"
-                ? "light"
-                : "dark"
-        );
-    };
-
-    themeToggle?.addEventListener("click", toggleTheme);
-
-    mobileThemeToggle?.addEventListener("click", toggleTheme);
-
-    syncThemeControls();
+    
     const body = document.body;
     const pageLoader = document.getElementById("pageLoader");
     const siteHeader = document.getElementById("siteHeader");
@@ -95,6 +19,84 @@ window.addEventListener("DOMContentLoaded", () => {
     const mobileLinks = document.querySelectorAll(".mobile-menu a");
     const factoryVideo = document.querySelector(".factory-video-element");
     const videoToggle = document.querySelector(".video-toggle");
+        /* =========================================================
+   DARK MODE
+========================================================= */
+
+const themeToggle = document.querySelector(".theme-toggle");
+const root = document.documentElement;
+
+const applyTheme = (theme) => {
+    if (theme === "dark") {
+        root.setAttribute("data-theme", "dark");
+
+        if (themeToggle) {
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to light mode"
+            );
+
+            themeToggle.setAttribute(
+                "aria-pressed",
+                "true"
+            );
+
+            const icon = themeToggle.querySelector(".theme-icon");
+
+            if (icon) {
+                icon.textContent = "☀️";
+            }
+        }
+
+        localStorage.setItem("mencc-theme", "dark");
+
+    } else {
+        root.removeAttribute("data-theme");
+
+        if (themeToggle) {
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to dark mode"
+            );
+
+            themeToggle.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+            const icon = themeToggle.querySelector(".theme-icon");
+
+            if (icon) {
+                icon.textContent = "🌙";
+            }
+        }
+
+        localStorage.setItem("mencc-theme", "light");
+    }
+};
+
+const savedTheme =
+    localStorage.getItem("mencc-theme");
+
+applyTheme(
+    savedTheme === "dark"
+        ? "dark"
+        : "light"
+);
+
+themeToggle?.addEventListener(
+    "click",
+    () => {
+        const isDark =
+            root.getAttribute("data-theme") === "dark";
+
+        applyTheme(
+            isDark
+                ? "light"
+                : "dark"
+        );
+    }
+);;
 
     const hideLoader = () => {
         if (!pageLoader) return;
@@ -933,8 +935,51 @@ window.setTimeout(hideLoader, 4000);
         document.getElementById(
             "customerEmail"
         );
+        const reviewCustomerBirthday =
+    document.getElementById(
+        "reviewCustomerBirthday"
+    );
+       
+
+    const customerBirthdayDay = document.getElementById("customerBirthdayDay");
+const customerBirthdayMonth = document.getElementById("customerBirthdayMonth");
 
 
+// Populate birthday days
+if (customerBirthdayDay) {
+    for (let day = 1; day <= 31; day++) {
+        const option = document.createElement("option");
+        option.value = day;
+        option.textContent = day;
+        customerBirthdayDay.appendChild(option);
+    }
+}
+
+
+// Populate birthday months
+if (customerBirthdayMonth) {
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
+
+    months.forEach((month, index) => {
+        const option = document.createElement("option");
+        option.value = index + 1;
+        option.textContent = month;
+        customerBirthdayMonth.appendChild(option);
+    });
+}
     /* =========================================================
        OVERVIEW
     ========================================================= */
@@ -2125,6 +2170,42 @@ const whatsappButton =
                 "Not provided";
 
         }
+        if (reviewCustomerBirthday) {
+
+    const day =
+        customerBirthdayDay?.value || "";
+
+    const month =
+        customerBirthdayMonth?.value || "";
+
+    if (day && month) {
+
+        const monthNames = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+
+        reviewCustomerBirthday.textContent =
+            `${day} ${monthNames[Number(month) - 1]}`;
+
+    } else {
+
+        reviewCustomerBirthday.textContent =
+            "Not provided";
+
+    }
+
+}
 
 
         if (reviewCustomerPhone) {
@@ -2155,35 +2236,23 @@ const whatsappButton =
         "click",
         () => {
 
-            const name =
-                customerName?.value.trim() ||
-                "";
+            const name = customerName?.value.trim() || "";
+const phone = customerPhone?.value.trim() || "";
+const birthdayDay = customerBirthdayDay?.value || "";
+const birthdayMonth = customerBirthdayMonth?.value || "";
 
-            const phone =
-                customerPhone?.value.trim() ||
-                "";
+if (!name || !phone) {
+    alert("Please enter your full name and phone number.");
+    return;
+}
 
+if (!birthdayDay || !birthdayMonth) {
+    alert("Please select your birthday.");
+    return;
+}
 
-            if (
-                !name ||
-                !phone
-            ) {
-
-                alert(
-                    "Please enter your full name and phone number."
-                );
-
-                return;
-            }
-
-
-            updateReview();
-
-
-            showStep(
-                step4,
-                4
-            );
+updateReview();
+showStep(step4, 4);
 
         }
     );
@@ -2323,21 +2392,31 @@ const whatsappButton =
 
             const orderData = {
 
-                customer: {
+    customer: {
 
-                    fullName:
-                        customerName?.value.trim() ||
-                        "",
+        fullName:
+            customerName?.value.trim() ||
+            "",
 
-                    phone:
-                        customerPhone?.value.trim() ||
-                        "",
+        phone:
+            customerPhone?.value.trim() ||
+            "",
 
-                    email:
-                        customerEmail?.value.trim() ||
-                        ""
+        email:
+            customerEmail?.value.trim() ||
+            "",
 
-                },
+        birthdayDay:
+            Number(
+                customerBirthdayDay?.value || 0
+            ),
+
+        birthdayMonth:
+            Number(
+                customerBirthdayMonth?.value || 0
+            )
+
+    },
 
 
                 delivery: {

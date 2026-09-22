@@ -446,36 +446,38 @@ window.setTimeout(hideLoader, 4000);
 
     const animateParallax = () => {
 
-        document
-            .querySelectorAll(
-                '[data-parallax-active="true"]'
-            )
-            .forEach(
-                (image) => {
+    document
+        .querySelectorAll(
+            '[data-parallax-active="true"]'
+        )
+        .forEach(
+            (image) => {
 
-                    const isHero =
-                        image.classList.contains(
-                            "hero-image"
-                        );
-
-                    const amount =
-                        isHero
-                            ? 2
-                            : 1.1;
-
-                    const scale =
-                        isHero
-                            ? 1.055
-                            : 1.035;
-
-                    image.style.transform =
-                        `scale(${scale}) translate(${pointerX * amount}px, ${pointerY * amount}px)`;
-
+                /*
+                 * HERO IMAGE
+                 * -------------------------------------------------
+                 * The hero is now a responsive 3:2 artwork.
+                 * Do not scale, translate, or crop it.
+                 */
+                if (
+                    image.classList.contains("hero-image")
+                ) {
+                    image.style.transform = "none";
+                    return;
                 }
-            );
 
-        rafId = null;
-    };
+                /*
+                 * Other website imagery keeps its
+                 * existing subtle parallax behavior.
+                 */
+                image.style.transform =
+                    `scale(1.035) translate(${pointerX * 1.1}px, ${pointerY * 1.1}px)`;
+
+            }
+        );
+
+    rafId = null;
+};
 
 
     window.addEventListener(

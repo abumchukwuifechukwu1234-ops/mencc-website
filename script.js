@@ -98,6 +98,17 @@ themeToggle?.addEventListener(
     }
 );;
 
+    /* Keep MENCC theme synchronized across open pages/tabs. */
+    window.addEventListener("storage", (event) => {
+        if (event.key !== "mencc-theme") return;
+
+        applyTheme(
+            event.newValue === "dark"
+                ? "dark"
+                : "light"
+        );
+    });
+
     const hideLoader = () => {
         if (!pageLoader) return;
 
@@ -2246,8 +2257,21 @@ if (!name || !phone) {
     return;
 }
 
-if (!birthdayDay || !birthdayMonth) {
-    alert("Please select your birthday.");
+/*
+ * Birthday is optional.
+ *
+ * If both are blank:
+ * → continue normally.
+ *
+ * If the customer starts entering a birthday:
+ * → require both day and month.
+ */
+
+if (
+    (birthdayDay && !birthdayMonth) ||
+    (!birthdayDay && birthdayMonth)
+) {
+    alert("Please complete your birthday or leave it blank.");
     return;
 }
 
@@ -2706,5 +2730,29 @@ Thank you.`;
     updateDeliveryButton();
 
     updateOrder();
+
+});
+/* =========================================================
+   MENCC FOOTER — BACK TO TOP
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const backToTop = document.querySelector(".mencc-back-top");
+
+    if (!backToTop) return;
+
+    backToTop.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
+                ? "auto"
+                : "smooth"
+        });
+
+    });
 
 });

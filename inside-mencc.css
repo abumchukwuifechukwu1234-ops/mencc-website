@@ -1,0 +1,1965 @@
+/* ========================================
+   INSIDE MENCC
+   Base Styles
+======================================== */
+
+:root {
+    --mencc-blue: #063b78;
+    --mencc-light-blue: #eaf6ff;
+    --mencc-white: #ffffff;
+    --mencc-black: #0a0a0a;
+    --mencc-gray: #6b7280;
+
+    --section-padding: clamp(80px, 10vw, 160px);
+}
+
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--mencc-white);
+    color: var(--mencc-black);
+    overflow-x: hidden;
+}
+
+
+video {
+    display: block;
+    width: 100%;
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.inside-hero {
+    position: relative;
+
+    min-height: 100svh;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+.inside-hero-media {
+    position: absolute;
+    inset: 0;
+}
+
+
+.inside-hero-media video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.inside-hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.72),
+            rgba(0, 0, 0, 0.12) 65%,
+            rgba(0, 0, 0, 0.18)
+        );
+}
+
+
+.inside-hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(1200px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding-bottom: clamp(60px, 10vw, 120px);
+
+    color: white;
+}
+
+
+.inside-eyebrow {
+    margin-bottom: 18px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+}
+
+
+.inside-hero h1 {
+    max-width: 850px;
+
+    font-size: clamp(48px, 7vw, 100px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.045em;
+
+    font-weight: 500;
+}
+
+
+.inside-hero-description {
+    max-width: 540px;
+
+    margin-top: 28px;
+
+    font-size: clamp(16px, 1.5vw, 20px);
+
+    line-height: 1.6;
+
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+.inside-scroll-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 42px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.inside-scroll-link span {
+    transition: transform 0.35s ease;
+}
+
+
+.inside-scroll-link:hover span {
+    transform: translateY(4px);
+}
+
+
+
+/* ========================================
+   GENERAL SECTION
+======================================== */
+
+.inside-section {
+    display: grid;
+
+    grid-template-columns: 0.8fr 1.2fr;
+
+    align-items: center;
+
+    gap: clamp(40px, 7vw, 110px);
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-section-content {
+    max-width: 480px;
+}
+
+
+.inside-section-content .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-section h2 {
+    font-size: clamp(42px, 5vw, 76px);
+
+    line-height: 1;
+
+    letter-spacing: -0.045em;
+
+    font-weight: 500;
+}
+
+
+.inside-section-content > p:last-child {
+    margin-top: 28px;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-section-media {
+    overflow: hidden;
+
+    border-radius: 2px;
+}
+
+
+.inside-section-media video {
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+
+
+/* ========================================
+   MOBILE — GENERAL SECTION
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-hero-content {
+        width: min(100% - 32px, 1200px);
+
+        padding-bottom: 48px;
+    }
+
+
+    .inside-hero h1 {
+        font-size: clamp(44px, 13vw, 68px);
+    }
+
+
+    .inside-hero-description {
+        font-size: 16px;
+
+        max-width: 420px;
+    }
+
+
+    .inside-section {
+        grid-template-columns: 1fr;
+
+        gap: 48px;
+
+        padding: 90px 24px;
+    }
+
+
+    .inside-section h2 {
+        font-size: clamp(42px, 12vw, 60px);
+    }
+
+
+    .inside-section-media video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 02 — PROCESS
+======================================== */
+
+.inside-process {
+    background: #f5f8fb;
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-process-intro {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+.inside-process-intro .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-process-intro h2 {
+    font-size: clamp(48px, 7vw, 100px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.05em;
+
+    font-weight: 500;
+}
+
+
+.inside-process-intro > p:last-child {
+    max-width: 520px;
+
+    margin: 28px auto 0;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-process-media {
+    max-width: 1200px;
+
+    margin: 90px auto 0;
+
+    overflow: hidden;
+}
+
+
+.inside-process-media video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+}
+
+
+.inside-process-detail {
+    max-width: 1200px;
+
+    margin: 120px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 0.7fr 1.3fr;
+
+    align-items: center;
+
+    gap: 80px;
+}
+
+
+.inside-process-detail-text h3 {
+    font-size: clamp(36px, 4vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 500;
+}
+
+
+.inside-process-detail-media {
+    overflow: hidden;
+}
+
+
+.inside-process-detail-media video {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+
+
+/* ========================================
+   CHAPTER 03 — PRODUCTION
+======================================== */
+
+.inside-production {
+    background: var(--mencc-white);
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-production-heading {
+    max-width: 1400px;
+
+    margin: 0 auto 70px;
+}
+
+
+.inside-production-heading .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-production-heading h2 {
+    font-size: clamp(52px, 8vw, 120px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 500;
+}
+
+
+.inside-production-video {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+.inside-production-video video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+}
+
+
+
+/* ========================================
+   MOBILE — PROCESS & PRODUCTION
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-process {
+        padding: 90px 24px;
+    }
+
+
+    .inside-process-media {
+        margin-top: 60px;
+    }
+
+
+    .inside-process-detail {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+        margin-top: 80px;
+    }
+
+
+    .inside-production {
+        padding: 90px 24px;
+    }
+
+
+    .inside-production-heading {
+        margin-bottom: 45px;
+    }
+
+
+    .inside-production-video video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 04 — QUALITY
+======================================== */
+
+.inside-quality {
+    background: var(--mencc-blue);
+
+    color: white;
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-quality-heading {
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+
+.inside-quality-heading .inside-eyebrow {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+.inside-quality-heading h2 {
+    max-width: 900px;
+
+    font-size: clamp(52px, 8vw, 120px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 500;
+}
+
+
+.inside-quality-heading > p:last-child {
+    max-width: 480px;
+
+    margin-top: 30px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-quality-feature {
+    max-width: 1200px;
+
+    margin: 90px auto 0;
+
+    overflow: hidden;
+}
+
+
+.inside-quality-feature video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+}
+
+
+.inside-quality-grid {
+    max-width: 1200px;
+
+    margin: 130px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 0.75fr 1.25fr;
+
+    align-items: center;
+
+    gap: 90px;
+}
+
+
+.inside-quality-copy h3 {
+    font-size: clamp(38px, 4vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 500;
+}
+
+
+.inside-quality-copy > p:last-child {
+    max-width: 430px;
+
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+.inside-quality-video {
+    overflow: hidden;
+}
+
+
+.inside-quality-video video {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+
+
+/* ========================================
+   MOBILE — QUALITY
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-quality {
+        padding: 90px 24px;
+    }
+
+
+    .inside-quality-feature {
+        margin-top: 60px;
+    }
+
+
+    .inside-quality-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        margin-top: 80px;
+    }
+
+
+    .inside-quality-feature video,
+    .inside-quality-video video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 05 — THE PEOPLE
+======================================== */
+
+.inside-people {
+    background: var(--mencc-white);
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-people-heading {
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+
+.inside-people-heading .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-people-heading h2 {
+    max-width: 900px;
+
+    font-size: clamp(52px, 8vw, 120px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 500;
+}
+
+
+.inside-people-heading > p:last-child {
+    max-width: 500px;
+
+    margin-top: 30px;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-people-feature {
+    max-width: 1200px;
+
+    margin: 90px auto 0;
+
+    overflow: hidden;
+}
+
+
+.inside-people-feature video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+}
+
+
+.inside-people-story {
+    max-width: 1200px;
+
+    margin: 130px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 0.8fr 1.2fr;
+
+    align-items: center;
+
+    gap: 90px;
+}
+
+
+.inside-people-story-text h3 {
+    font-size: clamp(38px, 4vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 500;
+}
+
+
+.inside-people-story-media {
+    overflow: hidden;
+}
+
+
+.inside-people-story-media video {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+
+
+/* ========================================
+   MOBILE — PEOPLE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-people {
+        padding: 90px 24px;
+    }
+
+
+    .inside-people-feature {
+        margin-top: 60px;
+    }
+
+
+    .inside-people-story {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        margin-top: 80px;
+    }
+
+
+    .inside-people-feature video,
+    .inside-people-story-media video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 06 — DISTRIBUTION
+======================================== */
+
+.inside-distribution {
+    background: #f5f8fb;
+
+    padding: var(--section-padding) 48px;
+}
+
+
+.inside-distribution-heading {
+    max-width: 1400px;
+
+    margin: 0 auto;
+}
+
+
+.inside-distribution-heading .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-distribution-heading h2 {
+    max-width: 1000px;
+
+    font-size: clamp(52px, 8vw, 120px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 500;
+}
+
+
+.inside-distribution-heading > p:last-child {
+    max-width: 520px;
+
+    margin-top: 30px;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-distribution-feature {
+    max-width: 1200px;
+
+    margin: 90px auto 0;
+
+    overflow: hidden;
+}
+
+
+.inside-distribution-feature video {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+}
+
+
+.inside-distribution-grid {
+    max-width: 1200px;
+
+    margin: 130px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 1.2fr 0.8fr;
+
+    align-items: center;
+
+    gap: 90px;
+}
+
+
+.inside-distribution-media {
+    overflow: hidden;
+}
+
+
+.inside-distribution-media video {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+
+.inside-distribution-copy h3 {
+    font-size: clamp(38px, 4vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+
+    font-weight: 500;
+}
+
+
+.inside-distribution-copy > p:last-child {
+    max-width: 430px;
+
+    margin-top: 25px;
+
+    color: var(--mencc-gray);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+
+/* ========================================
+   MOBILE — DISTRIBUTION
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-distribution {
+        padding: 90px 24px;
+    }
+
+
+    .inside-distribution-feature {
+        margin-top: 60px;
+    }
+
+
+    .inside-distribution-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        margin-top: 80px;
+    }
+
+
+    .inside-distribution-feature video,
+    .inside-distribution-media video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 07 — THE MENCC COLLECTION
+======================================== */
+
+.inside-collection {
+    background: var(--mencc-white);
+
+    padding-top: var(--section-padding);
+}
+
+
+.inside-collection-heading {
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 0 48px var(--section-padding);
+}
+
+
+.inside-collection-heading .inside-eyebrow {
+    color: var(--mencc-blue);
+}
+
+
+.inside-collection-heading h2 {
+    max-width: 900px;
+
+    font-size: clamp(56px, 8vw, 125px);
+
+    line-height: 0.94;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 500;
+}
+
+
+.inside-collection-heading > p:last-child {
+    max-width: 520px;
+
+    margin-top: 30px;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+
+/* ========================================
+   PRODUCT ROW
+======================================== */
+
+.inside-product {
+    min-height: 80vh;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    padding: 80px 7vw;
+
+    gap: clamp(50px, 8vw, 140px);
+}
+
+
+.inside-product-light {
+    background: #f5f8fb;
+}
+
+
+.inside-product-blue {
+    background: var(--mencc-blue);
+
+    color: white;
+}
+
+
+.inside-product-media {
+    overflow: hidden;
+}
+
+
+.inside-product-media video {
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+}
+
+
+.inside-product-info {
+    max-width: 520px;
+}
+
+
+.inside-product-blue .inside-eyebrow {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+
+.inside-product h3 {
+    font-size: clamp(48px, 6vw, 90px);
+
+    line-height: 0.96;
+
+    letter-spacing: -0.05em;
+
+    font-weight: 500;
+}
+
+
+.inside-product-info > p:not(.inside-eyebrow) {
+    max-width: 420px;
+
+    margin-top: 28px;
+
+    color: var(--mencc-gray);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+.inside-product-blue .inside-product-info > p:not(.inside-eyebrow) {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+
+/* ========================================
+   PRODUCT LINK
+======================================== */
+
+.inside-product-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 35px;
+
+    color: var(--mencc-blue);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.inside-product-blue .inside-product-link {
+    color: white;
+}
+
+
+.inside-product-link span {
+    transition: transform 0.35s ease;
+}
+
+
+.inside-product-link:hover span {
+    transform: translateX(5px);
+}
+
+
+
+/* ========================================
+   MOBILE — COLLECTION
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-collection-heading {
+        padding-left: 24px;
+
+        padding-right: 24px;
+    }
+
+
+    .inside-product {
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        padding: 70px 24px;
+
+        gap: 50px;
+    }
+
+
+    /*
+     * Keep the product image first on mobile
+     * for the blue product row.
+     */
+
+    .inside-product-blue .inside-product-media {
+        order: -1;
+    }
+
+
+    .inside-product h3 {
+        font-size: clamp(46px, 13vw, 64px);
+    }
+
+
+    .inside-product-media video {
+        aspect-ratio: 4 / 3;
+    }
+
+}
+
+
+
+/* ========================================
+   CHAPTER 08 — CLOSING
+======================================== */
+
+.inside-closing {
+    position: relative;
+
+    min-height: 90svh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #000;
+
+    color: white;
+}
+
+
+.inside-closing-media {
+    position: absolute;
+
+    inset: 0;
+}
+
+
+.inside-closing-media video {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.inside-closing-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.65)
+        );
+}
+
+
+.inside-closing-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(900px, calc(100% - 48px));
+
+    text-align: center;
+}
+
+
+.inside-closing-content .inside-eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+.inside-closing-content h2 {
+    font-size: clamp(60px, 9vw, 140px);
+
+    line-height: 0.92;
+
+    letter-spacing: -0.06em;
+
+    font-weight: 500;
+}
+
+
+.inside-closing-content > p:not(.inside-eyebrow) {
+    max-width: 560px;
+
+    margin: 30px auto 0;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+
+/* ========================================
+   CLOSING BUTTONS
+======================================== */
+
+.inside-closing-actions {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 42px;
+}
+
+
+.inside-closing-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 50px;
+
+    padding: 0 25px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.inside-closing-button:hover {
+    transform: translateY(-2px);
+}
+
+
+.inside-closing-button:active {
+    transform: translateY(0);
+}
+
+
+.inside-closing-button-primary {
+    background: white;
+
+    color: var(--mencc-blue);
+}
+
+
+.inside-closing-button-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    color: white;
+}
+
+
+.inside-closing-button-secondary:hover {
+    background: white;
+
+    color: var(--mencc-blue);
+}
+
+
+
+/* ========================================
+   MOBILE — CLOSING
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-closing {
+        min-height: 85svh;
+    }
+
+
+    .inside-closing-content {
+        width: calc(100% - 32px);
+    }
+
+
+    .inside-closing-content h2 {
+        font-size: clamp(54px, 15vw, 76px);
+    }
+
+
+    .inside-closing-actions {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .inside-closing-button {
+        width: 100%;
+
+        max-width: 280px;
+    }
+
+}
+
+
+
+/* ========================================
+   TABLET / SMALL LAPTOP REFINEMENT
+======================================== */
+
+@media (min-width: 769px) and (max-width: 1100px) {
+
+    .inside-section {
+        gap: 50px;
+
+        padding-left: 32px;
+
+        padding-right: 32px;
+    }
+
+
+    .inside-process,
+    .inside-production,
+    .inside-quality,
+    .inside-people,
+    .inside-distribution {
+        padding-left: 32px;
+
+        padding-right: 32px;
+    }
+
+
+    .inside-process-detail,
+    .inside-quality-grid,
+    .inside-people-story,
+    .inside-distribution-grid {
+        gap: 55px;
+    }
+
+
+    .inside-product {
+        gap: 55px;
+
+        padding-left: 5vw;
+
+        padding-right: 5vw;
+    }
+
+
+    .inside-chapter-nav {
+        right: 18px;
+    }
+
+}
+
+
+
+/* ========================================
+   MENCC CINEMATIC ANIMATION SYSTEM
+======================================== */
+
+
+/* ========================================
+   BASE REVEAL
+======================================== */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(28px);
+
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.reveal.is-visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+
+/* ========================================
+   EYEBROW
+======================================== */
+
+.inside-eyebrow.reveal {
+    transition-duration: 0.7s;
+}
+
+
+
+/* ========================================
+   HEADINGS
+======================================== */
+
+h1.reveal,
+h2.reveal,
+h3.reveal {
+    transition-duration: 1s;
+}
+
+
+
+/* ========================================
+   HERO ANIMATION
+======================================== */
+
+.inside-hero h1.reveal {
+    transform: translateY(35px);
+}
+
+
+.inside-hero h1.reveal.is-visible {
+    transform: translateY(0);
+}
+
+
+.inside-hero-description.reveal {
+    transition-delay: 0.08s;
+}
+
+
+.inside-scroll-link.reveal {
+    transition-delay: 0.16s;
+}
+
+
+
+/* ========================================
+   MEDIA CONTAINERS
+======================================== */
+
+.inside-section-media,
+.inside-process-media,
+.inside-process-detail-media,
+.inside-production-video,
+.inside-quality-feature,
+.inside-quality-video,
+.inside-people-feature,
+.inside-people-story-media,
+.inside-distribution-feature,
+.inside-distribution-media,
+.inside-product-media {
+    overflow: hidden;
+}
+
+
+
+/* ========================================
+   MOBILE — REDUCE MOVEMENT
+======================================== */
+
+@media (max-width: 768px) {
+
+    .reveal {
+        transform: translateY(18px);
+
+        transition-duration: 0.65s;
+    }
+
+}
+
+
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+
+    .reveal {
+        opacity: 1;
+
+        transform: none;
+    }
+
+}
+
+
+
+/* ========================================
+   CINEMATIC MEDIA REVEALS
+======================================== */
+
+.media-reveal {
+    opacity: 0;
+
+    transform: scale(1.025);
+
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.media-reveal.is-visible {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+
+/* ========================================
+   MOBILE — SOFTER MEDIA MOVEMENT
+======================================== */
+
+@media (max-width: 768px) {
+
+    .media-reveal {
+        transform: scale(1.015);
+
+        transition:
+            opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+}
+
+
+
+/* ========================================
+   REDUCED MOTION — MEDIA
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .media-reveal {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+}
+
+
+
+/* ========================================
+   INSIDE MENCC — CHAPTER NAVIGATION
+======================================== */
+
+.inside-chapter-nav {
+    position: fixed;
+
+    right: 28px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 100;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 8px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    border-radius: 999px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.inside-chapter-nav.is-visible {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.inside-chapter-nav a {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 30px;
+
+    height: 24px;
+
+    color: rgba(10, 10, 10, 0.42);
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.inside-chapter-nav a::before {
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+
+    width: 2px;
+
+    height: 0;
+
+    background: var(--mencc-blue);
+
+    border-radius: 999px;
+
+    transition:
+        height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.inside-chapter-nav a:hover {
+    color: var(--mencc-blue);
+
+    transform: translateX(-2px);
+}
+
+
+.inside-chapter-nav a.is-active {
+    color: var(--mencc-blue);
+}
+
+
+.inside-chapter-nav a.is-active::before {
+    height: 16px;
+}
+
+
+
+/* ========================================
+   MOBILE — CHAPTER NAVIGATION
+======================================== */
+
+@media (max-width: 768px) {
+
+    .inside-chapter-nav {
+        right: 12px;
+
+        gap: 7px;
+
+        padding: 8px 5px;
+    }
+
+
+    .inside-chapter-nav a {
+        width: 24px;
+
+        height: 20px;
+
+        font-size: 8px;
+    }
+
+
+    .inside-chapter-nav a.is-active::before {
+        height: 13px;
+    }
+
+}
+
+
+
+/* ========================================
+   REDUCED MOTION — CHAPTER NAVIGATION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .inside-chapter-nav,
+    .inside-chapter-nav a,
+    .inside-chapter-nav a::before {
+        transition: none;
+    }
+
+}
+
+/* =========================================================
+   MENCC — SHARED LIGHT / DARK THEME
+   Uses the same "mencc-theme" preference as the homepage.
+   ========================================================= */
+
+.inside-theme-toggle {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 500;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .38);
+    border-radius: 50%;
+    background: rgba(6, 27, 52, .56);
+    color: #ffffff;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+    cursor: pointer;
+    transition:
+        transform .35s cubic-bezier(.22, 1, .36, 1),
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+}
+
+.inside-theme-toggle:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .24);
+}
+
+.inside-theme-toggle:active {
+    transform: scale(.96);
+}
+
+.inside-theme-icon {
+    display: block;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* DARK MODE */
+
+html[data-theme="dark"] body {
+    background: #04131d;
+    color: #f4fbff;
+}
+
+html[data-theme="dark"] .inside-theme-toggle {
+    background: rgba(10, 39, 72, .82);
+    border-color: rgba(105, 215, 255, .30);
+    color: #b7ecff;
+    box-shadow:
+        0 12px 34px rgba(0, 0, 0, .30),
+        0 0 24px rgba(105, 215, 255, .08);
+}
+
+/* Light sections become deep MENCC navy-blue surfaces. */
+html[data-theme="dark"] .inside-section,
+html[data-theme="dark"] .inside-production,
+html[data-theme="dark"] .inside-people,
+html[data-theme="dark"] .inside-collection {
+    background: #061b2a;
+    color: #f4fbff;
+}
+
+html[data-theme="dark"] .inside-process,
+html[data-theme="dark"] .inside-distribution,
+html[data-theme="dark"] .inside-product-light {
+    background: #092238;
+    color: #f4fbff;
+}
+
+/* Main text hierarchy on dark surfaces. */
+html[data-theme="dark"] .inside-section h2,
+html[data-theme="dark"] .inside-process-intro h2,
+html[data-theme="dark"] .inside-process-detail-text h3,
+html[data-theme="dark"] .inside-production-heading h2,
+html[data-theme="dark"] .inside-people-heading h2,
+html[data-theme="dark"] .inside-people-story-text h3,
+html[data-theme="dark"] .inside-distribution-heading h2,
+html[data-theme="dark"] .inside-distribution-copy h3,
+html[data-theme="dark"] .inside-collection-heading h2,
+html[data-theme="dark"] .inside-product h3 {
+    color: #f7fcff;
+}
+
+html[data-theme="dark"] .inside-section-content > p:last-child,
+html[data-theme="dark"] .inside-process-intro > p:last-child,
+html[data-theme="dark"] .inside-people-heading > p:last-child,
+html[data-theme="dark"] .inside-distribution-heading > p:last-child,
+html[data-theme="dark"] .inside-distribution-copy > p:last-child,
+html[data-theme="dark"] .inside-collection-heading > p:last-child,
+html[data-theme="dark"] .inside-product-info > p:not(.inside-eyebrow) {
+    color: #a9bfcc;
+}
+
+/* Aqua accents remain readable without becoming neon. */
+html[data-theme="dark"] .inside-section-content .inside-eyebrow,
+html[data-theme="dark"] .inside-process-intro .inside-eyebrow,
+html[data-theme="dark"] .inside-production-heading .inside-eyebrow,
+html[data-theme="dark"] .inside-people-heading .inside-eyebrow,
+html[data-theme="dark"] .inside-distribution-heading .inside-eyebrow,
+html[data-theme="dark"] .inside-collection-heading .inside-eyebrow,
+html[data-theme="dark"] .inside-product-light .inside-eyebrow {
+    color: #69d7ff;
+}
+
+html[data-theme="dark"] .inside-product-link {
+    color: #69d7ff;
+}
+
+/* Keep the intentionally blue chapter visually blue. */
+html[data-theme="dark"] .inside-quality,
+html[data-theme="dark"] .inside-product-blue {
+    background: #063b78;
+    color: #ffffff;
+}
+
+/* The quality section already uses white text, so only its muted copy needs tuning. */
+html[data-theme="dark"] .inside-quality-heading .inside-eyebrow,
+html[data-theme="dark"] .inside-quality-heading > p:last-child,
+html[data-theme="dark"] .inside-quality-copy > p:last-child {
+    color: rgba(255, 255, 255, .76);
+}
+
+/* Chapter navigation */
+html[data-theme="dark"] .inside-chapter-nav {
+    background: rgba(5, 23, 36, .78);
+    border-color: rgba(105, 215, 255, .18);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .25);
+}
+
+html[data-theme="dark"] .inside-chapter-nav a {
+    color: rgba(232, 248, 255, .50);
+}
+
+html[data-theme="dark"] .inside-chapter-nav a:hover,
+html[data-theme="dark"] .inside-chapter-nav a.is-active {
+    color: #69d7ff;
+}
+
+/* Product links inside the intentionally blue product row. */
+html[data-theme="dark"] .inside-product-blue .inside-product-link {
+    color: #ffffff;
+}
+
+/* Keep cinematic hero and closing sections untouched by the theme surface swap. */
+html[data-theme="dark"] .inside-hero,
+html[data-theme="dark"] .inside-closing {
+    background: #000;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .inside-theme-toggle {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .inside-theme-icon {
+        font-size: 17px;
+    }
+}

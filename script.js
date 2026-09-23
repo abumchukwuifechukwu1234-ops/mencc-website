@@ -4,7 +4,7 @@ const SUPABASE_FUNCTION_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_6CtN-shAPtSOPBPffprcgw_tcAaI1ui";
 
-const MENCC_WHATSAPP_NUMBER = "2349077428155";
+const MENCC_WHATSAPP_NUMBER = "2348147606312";
 
 window.addEventListener("DOMContentLoaded", () => {
     

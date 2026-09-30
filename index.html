@@ -21,7 +21,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 >
 </head>
-<body>
+<body class="landing-page">
     <div class="page-loader" id="pageLoader" aria-hidden="true">
         <div class="loader-ripple"></div>
         <div class="loader-content">
@@ -59,6 +59,7 @@
                     <a href="#journey">Our Journey</a>
                     <a href="#experience">MENCC Life</a>
                     <a href="#distribution">Delivery</a>
+                    <a href="inside-mencc.html" class="nav-discover-link">Discover MENCC</a>
                 </div>
 
                 <div class="nav-actions">
@@ -86,6 +87,7 @@
                 <a href="#journey">Our Journey</a>
                 <a href="#experience">MENCC Life</a>
                 <a href="#distribution">Delivery</a>
+                <a href="inside-mencc.html" class="mobile-discover-link">Discover MENCC</a>
                 <button type="button" data-order-trigger>Start your order <span>→</span></button>
             </div>
         </div>
@@ -173,19 +175,32 @@
                     </div>
 
                     <div class="product-grid">
-                        <article class="product-card product-card-tall reveal-up" data-product="50cl">
+                        <article class="product-card product-card-sachet reveal-up" data-product="sachet" id="product-sachet">
+                            <div class="product-image">
+                                <img src="assets/10-sachet-water-cinematic-hero.jpg" alt="MENCC Signature Sachet Water — 20 sachets per bag" loading="lazy">
+                                <span class="image-tag sachet-tag">20 SACHETS · 1 BAG</span>
+                            </div>
+                            <div class="product-card-body">
+                                <span class="product-index">01</span>
+                                <h3>Pure for every day.</h3>
+                                <p>Everyday refreshment, thoughtfully packaged as 20 sachets per bag for homes, gatherings and life on the move.</p>
+                                <button class="product-button" type="button" data-product-select="sachet">View Sachet Water <span>→</span></button>
+                            </div>
+                        </article>
+
+                        <article class="product-card product-card-tall reveal-up delay-1" data-product="50cl">
                             <div class="product-image"><img src="assets/08-50cl-cinematic-hero.jpg" alt="MENCC 50cl Premium Water" loading="lazy"><span class="image-tag">50CL</span></div>
-                            <div class="product-card-body"><span class="product-index">01</span><h3>Everyday hydration.</h3><p>Compact and made for life on the go.</p><button class="product-button" type="button" data-product-select="50cl">View 50cl <span>→</span></button></div>
+                            <div class="product-card-body"><span class="product-index">02</span><h3>Everyday hydration.</h3><p>Compact and made for life on the go.</p><button class="product-button" type="button" data-product-select="50cl">View 50cl <span>→</span></button></div>
                         </article>
 
-                        <article class="product-card product-card-featured reveal-up delay-1" data-product="75cl" id="product-75cl">
+                        <article class="product-card product-card-featured reveal-up delay-2" data-product="75cl" id="product-75cl">
                             <div class="product-image"><img src="assets/09-75cl-cinematic-hero.jpg" alt="MENCC 75cl Premium Water" loading="lazy"><span class="image-tag featured">Signature</span></div>
-                            <div class="product-card-body"><span class="product-index">02</span><h3>Pure confidence.</h3><p>The signature MENCC bottle for everyday moments and the table.</p><button class="product-button" type="button" data-product-select="75cl">View 75cl <span>↗</span></button></div>
+                            <div class="product-card-body"><span class="product-index">03</span><h3>Pure confidence.</h3><p>The signature MENCC bottle for everyday moments and the table.</p><button class="product-button" type="button" data-product-select="75cl">View 75cl <span>↗</span></button></div>
                         </article>
 
-                        <article class="product-card product-card-wide reveal-up delay-2" data-product="19l">
+                        <article class="product-card product-card-wide reveal-up delay-3" data-product="19l">
                             <div class="product-image"><img src="assets/07-19l-home-space.jpg" alt="MENCC 19L Premium Water" loading="lazy"><span class="image-tag">19L</span></div>
-                            <div class="product-card-body"><span class="product-index">03</span><h3>Hydration for every space.</h3><p>Built around home, office, business and everyday shared spaces.</p><button class="product-button" type="button" data-product-select="19l">View 19L <span>→</span></button></div>
+                            <div class="product-card-body"><span class="product-index">04</span><h3>Hydration for every space.</h3><p>Built around home, office, business and everyday shared spaces.</p><button class="product-button" type="button" data-product-select="19l">View 19L <span>→</span></button></div>
                         </article>
                     </div>
 
@@ -242,10 +257,86 @@
                 </div>
             </section>
 
+            <section class="trust-section" id="trust" data-section="trust">
+                <div class="section-shell">
+                    <div class="trust-heading reveal-up">
+                        <div>
+                            <p class="section-kicker">07 · TRUST &amp; STANDARDS</p>
+                            <h2>Built with standards.<br><span>Backed by documentation.</span></h2>
+                        </div>
+                        <p class="trust-intro">MENCC Ltd is a registered Nigerian company committed to delivering quality water products with care, consistency and recognised standards in mind.</p>
+                    </div>
+
+                    <div class="trust-grid">
+                        <article class="trust-card reveal-up">
+                            <div class="trust-card-top">
+                                <span class="trust-card-index">01</span>
+                                <span class="trust-card-type">CAC REGISTRATION</span>
+                            </div>
+                            <button
+                                type="button"
+                                class="trust-document"
+                                data-cert-open="cac"
+                                aria-label="View MENCC CAC Certificate of Incorporation"
+                            >
+                                <img
+                                    src="assets/mencc-cac-certificate-of-incorporation.jpeg"
+                                    alt="MENCC Ltd Certificate of Incorporation"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+                                <span class="trust-document-overlay">
+                                    <span>View document</span>
+                                    <strong>↗</strong>
+                                </span>
+                            </button>
+                            <div class="trust-card-body">
+                                <h3>Certificate of Incorporation</h3>
+                                <p>MENCC Ltd is incorporated as a private company limited by shares in Nigeria.</p>
+                                <button type="button" class="trust-view-link" data-cert-open="cac">
+                                    View Certificate <span>→</span>
+                                </button>
+                            </div>
+                        </article>
+
+                        <article class="trust-card reveal-up delay-1">
+                            <div class="trust-card-top">
+                                <span class="trust-card-index">02</span>
+                                <span class="trust-card-type">SON PRODUCT CERTIFICATION</span>
+                            </div>
+                            <button
+                                type="button"
+                                class="trust-document"
+                                data-cert-open="son"
+                                aria-label="View MENCC SON product certification documents"
+                            >
+                                <img
+                                    src="assets/mencc-son-product-certifications.jpeg"
+                                    alt="MENCC product certification documents from the Standards Organisation of Nigeria"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+                                <span class="trust-document-overlay">
+                                    <span>View document</span>
+                                    <strong>↗</strong>
+                                </span>
+                            </button>
+                            <div class="trust-card-body">
+                                <h3>MENCC Water Products</h3>
+                                <p>Documentation for MENCC Premium Bolted Water and MENCC Dispenser Water, including the Standards Organisation of Nigeria certification information shown on the product documents.</p>
+                                <button type="button" class="trust-view-link" data-cert-open="son">
+                                    View Certification <span>→</span>
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
             <section class="experience-section" id="experience" data-section="experience">
                 <div class="section-shell">
                     <div class="section-top reveal-up">
-                        <div><p class="section-kicker">06 · MENCC IN REAL LIFE</p><h2>Water for <span>every moment.</span></h2></div>
+                        <div><p class="section-kicker">08 · MENCC IN REAL LIFE</p><h2>Water for <span>every moment.</span></h2></div>
                         <p class="section-intro">From the everyday to the occasions worth gathering for.</p>
                     </div>
                     <div class="experience-grid">
@@ -257,9 +348,9 @@
             </section>
 
             <section class="distribution-section" id="distribution" data-section="distribution">
-                <div class="distribution-media reveal-image"><img src="assets/03-delivery-handoff.jpg" alt="MENCC delivery handoff" loading="lazy"><div class="distribution-badge"><span>07</span><strong>MENCC<br>TO YOUR DOOR</strong></div></div>
+                <div class="distribution-media reveal-image"><img src="assets/03-delivery-handoff.jpg" alt="MENCC delivery handoff" loading="lazy"><div class="distribution-badge"><span>09</span><strong>MENCC<br>TO YOUR DOOR</strong></div></div>
                 <div class="distribution-copy section-shell reveal-up">
-                    <p class="section-kicker">07 · DISTRIBUTION</p>
+                    <p class="section-kicker">09 · DISTRIBUTION</p>
                     <h2>From MENCC<br><span>to your door.</span></h2>
                     <p class="lead">Explore options for getting MENCC to your home, office, business or event.</p>
                     <div class="distribution-list">
@@ -272,7 +363,7 @@
             <section class="order-section" id="order" data-section="order">
                 <div class="order-pulse" aria-hidden="true"></div>
                 <div class="section-shell order-callout reveal-up">
-                    <div><p class="section-kicker">08 · ORDER</p><h2>Your MENCC.<br><span>Your way.</span></h2><p>Choose your products, tell us where to deliver and send the completed order directly to MENCC on WhatsApp.</p></div>
+                    <div><p class="section-kicker">10 · ORDER</p><h2>Your MENCC.<br><span>Your way.</span></h2><p>Choose your products, tell us where to deliver and send the completed order directly to MENCC on WhatsApp.</p></div>
                     <button class="button button-light" type="button" data-order-trigger>Start your order <span>↗</span></button>
                 </div>
             </section>
@@ -511,6 +602,28 @@
             </section>
         </main>
 
+        <div class="trust-modal" id="trustModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="trustModalTitle">
+            <div class="trust-modal-backdrop" data-cert-close></div>
+            <div class="trust-modal-panel">
+                <div class="trust-modal-top">
+                    <div>
+                        <span class="trust-modal-kicker" id="trustModalKicker">MENCC DOCUMENT</span>
+                        <h2 id="trustModalTitle">Certification</h2>
+                    </div>
+                    <button class="trust-modal-close" type="button" data-cert-close aria-label="Close document viewer">×</button>
+                </div>
+
+                <div class="trust-modal-document">
+                    <img id="trustModalImage" src="" alt="" decoding="async">
+                </div>
+
+                <div class="trust-modal-bottom">
+                    <span id="trustModalCaption">Official MENCC documentation</span>
+                    <span>MENCC LTD</span>
+                </div>
+            </div>
+        </div>
+
         <aside class="order-drawer" id="orderDrawer" aria-hidden="true" aria-label="MENCC order drawer">
             <div class="order-backdrop" data-order-close></div>
             <div class="order-drawer-inner">
@@ -533,6 +646,27 @@
                     <div class="order-step active" data-step="1">
                         <div class="order-step-header"><span class="order-step-number">01</span><div><p class="order-eyebrow">BUILD YOUR ORDER</p><h2>Choose your MENCC.</h2><p>Select the products and quantities you need.</p></div></div>
                         <div class="order-products">
+                            <article class="order-product order-product-sachet" data-product="sachet">
+                                <div class="order-product-image">
+                                    <img src="assets/10-sachet-water-cinematic-hero.jpg" alt="MENCC Signature Sachet Water — 20 sachets per bag">
+                                </div>
+                                <div class="order-product-info">
+                                    <div>
+                                        <span class="order-product-size">20 SACHETS · 1 BAG</span>
+                                        <h3>MENCC Signature Sachet Water</h3>
+                                        <p>Pure everyday refreshment, packaged as 20 sachets in one orderable bag.</p>
+                                    </div>
+                                    <div class="order-product-bottom">
+                                        <span class="order-price">₦500 <small>/ bag</small></span>
+                                        <div class="quantity-control">
+                                            <button type="button" class="quantity-btn" data-action="decrease" data-product="sachet" aria-label="Decrease Sachet Water bags">−</button>
+                                            <span class="quantity-value" data-quantity="sachet">0</span>
+                                            <button type="button" class="quantity-btn" data-action="increase" data-product="sachet" aria-label="Increase Sachet Water bags">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
                             <article class="order-product" data-product="50cl"><div class="order-product-image"><img src="assets/08-50cl-cinematic-hero.jpg" alt="MENCC 50cl"></div><div class="order-product-info"><div><span class="order-product-size">50CL</span><h3>MENCC 50cl</h3><p>Perfect for everyday refreshment.</p></div><div class="order-product-bottom"><span class="order-price">₦400</span><div class="quantity-control"><button type="button" class="quantity-btn" data-action="decrease" data-product="50cl" aria-label="Decrease 50cl quantity">−</button><span class="quantity-value" data-quantity="50cl">0</span><button type="button" class="quantity-btn" data-action="increase" data-product="50cl" aria-label="Increase 50cl quantity">+</button></div></div></div></article>
                             <article class="order-product" data-product="75cl"><div class="order-product-image"><img src="assets/09-75cl-cinematic-hero.jpg" alt="MENCC 75cl"></div><div class="order-product-info"><div><span class="order-product-size">75CL · SIGNATURE</span><h3>MENCC 75cl</h3><p>Our signature premium bottle.</p></div><div class="order-product-bottom"><span class="order-price">₦700</span><div class="quantity-control"><button type="button" class="quantity-btn" data-action="decrease" data-product="75cl" aria-label="Decrease 75cl quantity">−</button><span class="quantity-value" data-quantity="75cl">0</span><button type="button" class="quantity-btn" data-action="increase" data-product="75cl" aria-label="Increase 75cl quantity">+</button></div></div></div></article>
                             <article class="order-product" data-product="19l"><div class="order-product-image"><img src="assets/07-19l-home-space.jpg" alt="MENCC 19L"></div><div class="order-product-info"><div><span class="order-product-size">19L</span><h3>MENCC 19L</h3><p>Made for homes, offices and businesses.</p></div><div class="order-product-bottom"><span class="order-price">₦5,000</span><div class="quantity-control"><button type="button" class="quantity-btn" data-action="decrease" data-product="19l" aria-label="Decrease 19L quantity">−</button><span class="quantity-value" data-quantity="19l">0</span><button type="button" class="quantity-btn" data-action="increase" data-product="19l" aria-label="Increase 19L quantity">+</button></div></div></div></article>
@@ -561,17 +695,28 @@
                     </div>
 
                     <div class="order-step" id="step3" data-step="3" hidden>
-                        <div class="order-overview"><div class="order-overview-content"><div class="order-overview-header"><span class="section-label">LIVE ORDER</span><span class="order-overview-status">LIVE ORDER</span></div><div class="order-overview-main"><div class="order-overview-details"><h3>Your MENCC.</h3><p class="order-overview-caption">Everything you've selected so far.</p><div class="order-overview-items" id="orderOverviewItems"><div class="order-overview-empty">Select a MENCC product to build your order.</div></div><div class="order-overview-delivery"><div class="overview-detail"><span>DELIVERY</span><strong id="overviewDeliveryType">Not selected</strong></div><div class="overview-detail"><span>LOCATION</span><strong id="overviewDeliveryLocation">Not selected</strong></div></div><div class="order-overview-total"><span>ORDER TOTAL</span><strong id="overviewTotal">₦0</strong></div></div><div class="order-overview-visual order-catch-game" id="orderCatchGame" aria-label="MENCC water droplet catching game">
+                        <div class="order-overview"><div class="order-overview-content"><div class="order-overview-header"><span class="section-label">LIVE ORDER</span><span class="order-overview-status">LIVE ORDER</span></div><div class="order-overview-main"><div class="order-overview-details"><h3>Your MENCC.</h3><p class="order-overview-caption">Everything you've selected so far.</p><div class="order-overview-items" id="orderOverviewItems"><div class="order-overview-empty">Select a MENCC product to build your order.</div></div><div class="order-overview-delivery"><div class="overview-detail"><span>DELIVERY</span><strong id="overviewDeliveryType">Not selected</strong></div><div class="overview-detail"><span>LOCATION</span><strong id="overviewDeliveryLocation">Not selected</strong></div></div><div class="order-overview-total"><span>ORDER TOTAL</span><strong id="overviewTotal">₦0</strong></div></div><div class="order-overview-visual order-catch-game" id="orderCatchGame" aria-label="Optional MENCC water game">
     <div class="catch-game-top">
-        <div>
-            <span class="catch-game-kicker">MENCC WATER GAME</span>
-            <h4>How many droplets can you catch?</h4>
+        <div class="catch-game-heading">
+            <span class="catch-game-kicker">OPTIONAL · JUST FOR FUN</span>
+            <h4>Catch the Drop</h4>
+            <p>Give it a try. Have some fun.</p>
         </div>
-        <div class="catch-game-timer" id="catchGameTimer" aria-live="polite">10</div>
+        <div class="catch-game-meta">
+            <span class="catch-game-badge">MENCC WATER GAME</span>
+            <div class="catch-game-timer" id="catchGameTimer" aria-live="polite">10</div>
+        </div>
     </div>
 
-    <div class="catch-game-stage" id="catchGameStage" tabindex="0">
+    <div class="catch-game-stage" id="catchGameStage" tabindex="0" aria-label="Game area. Move the bottle and catch falling water drops.">
         <div class="catch-game-rain-glow"></div>
+        <div class="catch-game-water-haze"></div>
+
+        <button type="button" class="catch-try-me" id="catchGameTryMe" aria-label="Try the MENCC water game">
+            <span class="try-me-word">TRY ME</span>
+            <span class="try-me-spark" aria-hidden="true">✦</span>
+        </button>
+
         <div class="catch-game-message" id="catchGameMessage">
             Move the bottle and catch as many droplets as you can.
         </div>
@@ -582,8 +727,12 @@
             <span class="catch-bottle-cap"></span>
             <span class="catch-bottle-neck"></span>
             <span class="catch-bottle-body">
-                <span>MENCC</span>
-                <small>PURE BY NATURE</small>
+                <span class="catch-bottle-water"></span>
+                <span class="catch-bottle-shine"></span>
+                <span class="catch-bottle-label">
+                    <b>MENCC</b>
+                    <small>PREMIUM WATER</small>
+                </span>
             </span>
         </div>
 
@@ -809,6 +958,14 @@
 
         </div>
 
+
+        <button
+            type="button"
+            class="confirmation-new-order"
+            id="startNewOrder"
+        >
+            Start a new order <span>↗</span>
+        </button>
 
         <button
             type="button"

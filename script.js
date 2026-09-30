@@ -19,84 +19,175 @@ window.addEventListener("DOMContentLoaded", () => {
     const mobileLinks = document.querySelectorAll(".mobile-menu a");
     const factoryVideo = document.querySelector(".factory-video-element");
     const videoToggle = document.querySelector(".video-toggle");
-        /* =========================================================
-   DARK MODE
-========================================================= */
+    /* =========================================================
+       TRUST & STANDARDS DOCUMENT VIEWER
+       UI-only layer. Does not alter MENCC order/business logic.
+    ========================================================= */
 
-const themeToggle = document.querySelector(".theme-toggle");
-const root = document.documentElement;
+    const trustModal = document.getElementById("trustModal");
+    const trustModalImage = document.getElementById("trustModalImage");
+    const trustModalTitle = document.getElementById("trustModalTitle");
+    const trustModalKicker = document.getElementById("trustModalKicker");
+    const trustModalCaption = document.getElementById("trustModalCaption");
+    const trustModalOpeners = document.querySelectorAll("[data-cert-open]");
+    const trustModalClosers = document.querySelectorAll("[data-cert-close]");
 
-const applyTheme = (theme) => {
-    if (theme === "dark") {
-        root.setAttribute("data-theme", "dark");
-
-        if (themeToggle) {
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to light mode"
-            );
-
-            themeToggle.setAttribute(
-                "aria-pressed",
-                "true"
-            );
-
-            const icon = themeToggle.querySelector(".theme-icon");
-
-            if (icon) {
-                icon.textContent = "☀️";
-            }
+    const trustDocuments = {
+        cac: {
+            kicker: "MENCC · CAC REGISTRATION",
+            title: "Certificate of Incorporation",
+            caption: "MENCC Ltd · Certificate of Incorporation",
+            src: "assets/mencc-cac-certificate-of-incorporation.jpeg",
+            alt: "MENCC Ltd Certificate of Incorporation"
+        },
+        son: {
+            kicker: "MENCC · SON PRODUCT CERTIFICATION",
+            title: "Product Certification",
+            caption: "MENCC Ltd · SON product certification documentation",
+            src: "assets/mencc-son-product-certifications.jpeg",
+            alt: "MENCC product certification documents from the Standards Organisation of Nigeria"
         }
+    };
 
-        localStorage.setItem("mencc-theme", "dark");
+    let trustModalLastFocusedElement = null;
 
-    } else {
-        root.removeAttribute("data-theme");
+    const closeTrustModal = () => {
+        if (!trustModal) return;
 
-        if (themeToggle) {
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to dark mode"
-            );
+        trustModal.classList.remove("is-open");
+        trustModal.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("cert-modal-open");
+        body.classList.remove("cert-modal-open");
 
-            themeToggle.setAttribute(
-                "aria-pressed",
-                "false"
-            );
-
-            const icon = themeToggle.querySelector(".theme-icon");
-
-            if (icon) {
-                icon.textContent = "🌙";
+        window.setTimeout(() => {
+            if (!trustModal.classList.contains("is-open") && trustModalImage) {
+                trustModalImage.removeAttribute("src");
             }
+        }, 460);
+
+        trustModalLastFocusedElement?.focus?.();
+        trustModalLastFocusedElement = null;
+    };
+
+    const openTrustModal = (type) => {
+        if (!trustModal || !trustModalImage) return;
+
+        const documentData = trustDocuments[type];
+        if (!documentData) return;
+
+        trustModalLastFocusedElement = document.activeElement;
+
+        trustModalKicker.textContent = documentData.kicker;
+        trustModalTitle.textContent = documentData.title;
+        trustModalCaption.textContent = documentData.caption;
+        trustModalImage.src = documentData.src;
+        trustModalImage.alt = documentData.alt;
+
+        trustModal.classList.add("is-open");
+        trustModal.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("cert-modal-open");
+        body.classList.add("cert-modal-open");
+
+        window.setTimeout(() => {
+            trustModal.querySelector(".trust-modal-close")?.focus();
+        }, 40);
+    };
+
+    trustModalOpeners.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+            openTrustModal(trigger.dataset.certOpen);
+        });
+    });
+
+    trustModalClosers.forEach((button) => {
+        button.addEventListener("click", closeTrustModal);
+    });
+
+    trustModal?.addEventListener("click", (event) => {
+        if (event.target === trustModal) {
+            closeTrustModal();
         }
+    });
 
-        localStorage.setItem("mencc-theme", "light");
-    }
-};
 
-const savedTheme =
-    localStorage.getItem("mencc-theme");
+    /* =========================================================
+       DARK MODE
+    ========================================================= */
 
-applyTheme(
-    savedTheme === "dark"
-        ? "dark"
-        : "light"
-);
+    const themeToggle = document.querySelector(".theme-toggle");
+    const root = document.documentElement;
 
-themeToggle?.addEventListener(
-    "click",
-    () => {
-        const isDark =
-            root.getAttribute("data-theme") === "dark";
+    const applyTheme = (theme) => {
+        if (theme === "dark") {
+            root.setAttribute("data-theme", "dark");
 
-        applyTheme(
-            isDark
-                ? "light"
-                : "dark"
-        );
-    }
-);;
+            if (themeToggle) {
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to light mode"
+                );
+
+                themeToggle.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+                const icon = themeToggle.querySelector(".theme-icon");
+
+                if (icon) {
+                    icon.textContent = "☀️";
+                }
+            }
+
+            localStorage.setItem("mencc-theme", "dark");
+
+        } else {
+            root.removeAttribute("data-theme");
+
+            if (themeToggle) {
+                themeToggle.setAttribute(
+                    "aria-label",
+                    "Switch to dark mode"
+                );
+
+                themeToggle.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+                const icon = themeToggle.querySelector(".theme-icon");
+
+                if (icon) {
+                    icon.textContent = "🌙";
+                }
+            }
+
+            localStorage.setItem("mencc-theme", "light");
+        }
+    };
+
+    const savedTheme =
+        localStorage.getItem("mencc-theme");
+
+    applyTheme(
+        savedTheme === "dark"
+            ? "dark"
+            : "light"
+    );
+
+    themeToggle?.addEventListener(
+        "click",
+        () => {
+            const isDark =
+                root.getAttribute("data-theme") === "dark";
+
+            applyTheme(
+                isDark
+                    ? "light"
+                    : "dark"
+            );
+        }
+    );;
 
     /* Keep MENCC theme synchronized across open pages/tabs. */
     window.addEventListener("storage", (event) => {
@@ -119,18 +210,19 @@ themeToggle?.addEventListener(
         }, 900);
     };
 
-   if (document.readyState === "loading") {
-    document.addEventListener(
-        "DOMContentLoaded",
-        () => window.setTimeout(hideLoader, 450),
-        { once: true }
-    );
-} else {
-    window.setTimeout(hideLoader, 450);
-}
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => window.setTimeout(hideLoader, 450),
+            { once: true }
+        );
+    } else {
+        window.setTimeout(hideLoader, 450);
+    }
 
-// Absolute fallback so the loader can NEVER trap the user
-window.setTimeout(hideLoader, 4000);
+    // Absolute fallback so the loader can NEVER trap the user
+    window.setTimeout(hideLoader, 4000);
+
     /* =========================================================
        HEADER
     ========================================================= */
@@ -223,12 +315,23 @@ window.setTimeout(hideLoader, 4000);
        ORDER DRAWER
     ========================================================= */
 
+    let orderCloseTimer = null;
+    const ORDER_CLOSE_DURATION = 720;
+
+
     const openOrderDrawer = (
         selectedProductKey = null
     ) => {
 
         if (!orderDrawer) return;
 
+        if (orderCloseTimer) {
+            window.clearTimeout(orderCloseTimer);
+            orderCloseTimer = null;
+        }
+
+        /* Interrupt a closing animation cleanly if Order Now is tapped again. */
+        orderDrawer.classList.remove("is-closing");
         orderDrawer.classList.add("is-open");
 
         orderDrawer.setAttribute(
@@ -237,6 +340,7 @@ window.setTimeout(hideLoader, 4000);
         );
 
         body.classList.add("order-open");
+        siteHeader?.classList.add("order-open-state");
 
         document.documentElement.style.scrollBehavior =
             "auto";
@@ -275,21 +379,42 @@ window.setTimeout(hideLoader, 4000);
 
         if (!orderDrawer) return;
 
-        orderDrawer.classList.remove(
-            "is-open"
-        );
+        if (
+            !orderDrawer.classList.contains("is-open") &&
+            !orderDrawer.classList.contains("is-closing")
+        ) {
+            return;
+        }
+
+        if (orderCloseTimer) {
+            window.clearTimeout(orderCloseTimer);
+        }
+
+        /* Keep the drawer in the DOM while its reverse animation plays. */
+        orderDrawer.classList.remove("is-open");
+        orderDrawer.classList.add("is-closing");
 
         orderDrawer.setAttribute(
             "aria-hidden",
             "true"
         );
 
-        body.classList.remove(
-            "order-open"
-        );
+        /* Keep page scrolling locked and the navbar tucked away until the
+           drawer has completely left the screen. */
+        body.classList.add("order-open");
+        siteHeader?.classList.add("order-open-state");
 
-        document.documentElement.style.scrollBehavior =
-            "smooth";
+        orderCloseTimer = window.setTimeout(() => {
+            orderDrawer.classList.remove("is-closing");
+
+            body.classList.remove("order-open");
+            siteHeader?.classList.remove("order-open-state");
+
+            document.documentElement.style.scrollBehavior =
+                "smooth";
+
+            orderCloseTimer = null;
+        }, ORDER_CLOSE_DURATION);
     };
 
 
@@ -360,6 +485,11 @@ window.setTimeout(hideLoader, 4000);
         (event) => {
 
             if (event.key === "Escape") {
+
+                if (trustModal?.classList.contains("is-open")) {
+                    closeTrustModal();
+                    return;
+                }
 
                 closeMobileMenu();
 
@@ -534,25 +664,25 @@ window.setTimeout(hideLoader, 4000);
     let rafId = null;
 
 
-  const animateParallax = () => {
-    document
-        .querySelectorAll('[data-parallax-active="true"]')
-        .forEach((image) => {
+    const animateParallax = () => {
+        document
+            .querySelectorAll('[data-parallax-active="true"]')
+            .forEach((image) => {
 
-            if (
-                image.classList.contains("hero-image") ||
-                image.closest(".source-media")
-            ) {
-                image.style.transform = "none";
-                return;
-            }
+                if (
+                    image.classList.contains("hero-image") ||
+                    image.closest(".source-media")
+                ) {
+                    image.style.transform = "none";
+                    return;
+                }
 
-            image.style.transform =
-                `scale(1.035) translate(${pointerX * 1.1}px, ${pointerY * 1.1}px)`;
-        });
+                image.style.transform =
+                    `scale(1.035) translate(${pointerX * 1.1}px, ${pointerY * 1.1}px)`;
+            });
 
-    rafId = null;
-};
+        rafId = null;
+    };
 
 
     window.addEventListener(
@@ -721,6 +851,7 @@ window.setTimeout(hideLoader, 4000);
     ========================================================= */
 
     const quantities = {
+        "sachet": 0,
         "50cl": 0,
         "75cl": 0,
         "19l": 0
@@ -728,6 +859,7 @@ window.setTimeout(hideLoader, 4000);
 
 
     const prices = {
+        "sachet": 500,
         "50cl": 400,
         "75cl": 700,
         "19l": 5000
@@ -738,6 +870,23 @@ window.setTimeout(hideLoader, 4000);
 
         {
             key:
+                "sachet",
+
+            name:
+                "MENCC Signature Sachet Water",
+
+            size:
+                "20 SACHETS · 1 BAG",
+
+            unit:
+                "bag",
+
+            image:
+                "assets/10-sachet-water-cinematic-hero.jpg"
+        },
+
+        {
+            key:
                 "50cl",
 
             name:
@@ -745,6 +894,9 @@ window.setTimeout(hideLoader, 4000);
 
             size:
                 "50CL",
+
+            unit:
+                "bottle",
 
             image:
                 "assets/08-50cl-cinematic-hero.jpg"
@@ -760,6 +912,9 @@ window.setTimeout(hideLoader, 4000);
             size:
                 "75CL",
 
+            unit:
+                "bottle",
+
             image:
                 "assets/09-75cl-cinematic-hero.jpg"
         },
@@ -773,6 +928,9 @@ window.setTimeout(hideLoader, 4000);
 
             size:
                 "19L",
+
+            unit:
+                "container",
 
             image:
                 "assets/07-19l-home-space.jpg"
@@ -848,6 +1006,11 @@ window.setTimeout(hideLoader, 4000);
 
 
     const quantityElements = {
+
+        "sachet":
+            document.querySelector(
+                '[data-quantity="sachet"]'
+            ),
 
         "50cl":
             document.querySelector(
@@ -946,51 +1109,83 @@ window.setTimeout(hideLoader, 4000);
         document.getElementById(
             "customerEmail"
         );
-        const reviewCustomerBirthday =
-    document.getElementById(
-        "reviewCustomerBirthday"
-    );
-       
 
-    const customerBirthdayDay = document.getElementById("customerBirthdayDay");
-const customerBirthdayMonth = document.getElementById("customerBirthdayMonth");
+    const reviewCustomerBirthday =
+        document.getElementById(
+            "reviewCustomerBirthday"
+        );
 
 
-// Populate birthday days
-if (customerBirthdayDay) {
-    for (let day = 1; day <= 31; day++) {
-        const option = document.createElement("option");
-        option.value = day;
-        option.textContent = day;
-        customerBirthdayDay.appendChild(option);
+    const customerBirthdayDay =
+        document.getElementById(
+            "customerBirthdayDay"
+        );
+
+    const customerBirthdayMonth =
+        document.getElementById(
+            "customerBirthdayMonth"
+        );
+
+
+    // Populate birthday days
+    if (customerBirthdayDay) {
+        for (let day = 1; day <= 31; day++) {
+            const option =
+                document.createElement("option");
+
+            option.value =
+                day;
+
+            option.textContent =
+                day;
+
+            customerBirthdayDay.appendChild(
+                option
+            );
+        }
     }
-}
 
 
-// Populate birthday months
-if (customerBirthdayMonth) {
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
+    // Populate birthday months
+    if (customerBirthdayMonth) {
 
-    months.forEach((month, index) => {
-        const option = document.createElement("option");
-        option.value = index + 1;
-        option.textContent = month;
-        customerBirthdayMonth.appendChild(option);
-    });
-}
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+
+        months.forEach(
+            (month, index) => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    index + 1;
+
+                option.textContent =
+                    month;
+
+                customerBirthdayMonth.appendChild(
+                    option
+                );
+            }
+        );
+    }
+
+
     /* =========================================================
        OVERVIEW
     ========================================================= */
@@ -1083,19 +1278,30 @@ if (customerBirthdayMonth) {
 
     /* CONFIRMATION */
 
-const orderConfirmation =
-    document.getElementById("orderConfirmation");
+    const orderConfirmation =
+        document.getElementById(
+            "orderConfirmation"
+        );
 
-const confirmationOrderNumber =
-    document.getElementById("confirmationOrderNumber");
+    const confirmationOrderNumber =
+        document.getElementById(
+            "confirmationOrderNumber"
+        );
 
-const confirmationTotal =
-    document.getElementById("confirmationTotal");
+    const confirmationTotal =
+        document.getElementById(
+            "confirmationTotal"
+        );
 
-const whatsappButton =
-    document.getElementById("whatsappButton");
+    const whatsappButton =
+        document.getElementById(
+            "whatsappButton"
+        );
 
-
+    const startNewOrderButton =
+        document.getElementById(
+            "startNewOrder"
+        );
 
 
     let selectedType = "";
@@ -1106,28 +1312,49 @@ const whatsappButton =
     ========================================================= */
 
     const catchGame =
-        document.getElementById("orderCatchGame");
+        document.getElementById(
+            "orderCatchGame"
+        );
 
     const catchGameStage =
-        document.getElementById("catchGameStage");
+        document.getElementById(
+            "catchGameStage"
+        );
 
     const catchGameStart =
-        document.getElementById("catchGameStart");
+        document.getElementById(
+            "catchGameStart"
+        );
+
+    const catchGameTryMe =
+        document.getElementById(
+            "catchGameTryMe"
+        );
 
     const catchGameTimer =
-        document.getElementById("catchGameTimer");
+        document.getElementById(
+            "catchGameTimer"
+        );
 
     const catchGameScore =
-        document.getElementById("catchGameScore");
+        document.getElementById(
+            "catchGameScore"
+        );
 
     const catchGameMessage =
-        document.getElementById("catchGameMessage");
+        document.getElementById(
+            "catchGameMessage"
+        );
 
     const catchGameStatus =
-        document.getElementById("catchGameStatus");
+        document.getElementById(
+            "catchGameStatus"
+        );
 
     const catchBottle =
-        document.getElementById("catchBottle");
+        document.getElementById(
+            "catchBottle"
+        );
 
     const catchGameState = {
         running: false,
@@ -1144,74 +1371,168 @@ const whatsappButton =
         playedForCurrentOrder: false,
         stageWidth: 0,
         stageHeight: 0,
-        bottleWidth: 42,
-        bottleHeight: 74,
+        bottleWidth: 72,
+        bottleHeight: 126,
+        dropWidth: 10,
+        dropHeight: 14,
         pointerActive: false
     };
 
     const refreshCatchMetrics = () => {
         if (!catchGameStage) return;
-        catchGameState.stageWidth = catchGameStage.clientWidth;
-        catchGameState.stageHeight = catchGameStage.clientHeight;
+
+        catchGameState.stageWidth =
+            catchGameStage.clientWidth;
+
+        catchGameState.stageHeight =
+            catchGameStage.clientHeight;
     };
 
     const clearCatchDrops = () => {
-        catchGameState.drops.forEach((drop) => drop.node.remove());
+        catchGameState.drops.forEach(
+            (drop) =>
+                drop.node.remove()
+        );
+
         catchGameState.drops.length = 0;
     };
 
     const renderCatchBottle = () => {
         if (!catchBottle) return;
-        const x = Math.max(8, Math.min(92, catchGameState.bottleX));
-        catchBottle.style.left = `${x}%`;
+
+        const x =
+            Math.max(
+                8,
+                Math.min(
+                    92,
+                    catchGameState.bottleX
+                )
+            );
+
+        catchBottle.style.left =
+            `${x}%`;
     };
 
     const updateCatchBottle = () => {
         if (!catchBottle) return;
+
         renderCatchBottle();
     };
 
     const setCatchGameMessage = (message) => {
         if (catchGameMessage) {
-            catchGameMessage.textContent = message;
+            catchGameMessage.textContent =
+                message;
         }
+    };
+
+    const flashCatchBottle = () => {
+        if (!catchBottle) return;
+
+        catchBottle.classList.remove(
+            "is-hit"
+        );
+
+        void catchBottle.offsetWidth;
+
+        catchBottle.classList.add(
+            "is-hit"
+        );
+
+        window.setTimeout(() => {
+            catchBottle.classList.remove(
+                "is-hit"
+            );
+        }, 380);
     };
 
     const resetCatchGame = () => {
         if (!catchGameStage) return;
 
         if (catchGameState.animationFrame) {
-            cancelAnimationFrame(catchGameState.animationFrame);
-            catchGameState.animationFrame = null;
+            cancelAnimationFrame(
+                catchGameState.animationFrame
+            );
+
+            catchGameState.animationFrame =
+                null;
         }
 
         if (catchGameState.timerInterval) {
-            clearInterval(catchGameState.timerInterval);
-            catchGameState.timerInterval = null;
+            clearInterval(
+                catchGameState.timerInterval
+            );
+
+            catchGameState.timerInterval =
+                null;
         }
 
         clearCatchDrops();
+
         refreshCatchMetrics();
 
-        catchGameState.running = false;
-        catchGameState.finished = false;
-        catchGameState.score = 0;
-        catchGameState.timeLeft = 10;
-        catchGameState.bottleX = 50;
-        catchGameState.targetBottleX = 50;
-        catchGameState.lastTime = 0;
-        catchGameState.spawnElapsed = 0;
-        catchGameState.pointerActive = false;
+        catchGameState.running =
+            false;
 
-        catchGameStage.classList.remove("is-playing", "is-finished");
+        catchGameState.finished =
+            false;
+
+        catchGameState.score =
+            0;
+
+        catchGameState.timeLeft =
+            10;
+
+        catchGameState.playedForCurrentOrder =
+            false;
+
+        catchGameState.bottleX =
+            50;
+
+        catchGameState.targetBottleX =
+            50;
+
+        catchGameState.lastTime =
+            0;
+
+        catchGameState.spawnElapsed =
+            0;
+
+        catchGameState.pointerActive =
+            false;
+
+        catchGameStage.classList.remove(
+            "is-playing",
+            "is-finished"
+        );
+
         if (catchGameStart) {
-            catchGameStart.disabled = false;
-            catchGameStart.textContent = "START GAME →";
+            catchGameStart.disabled =
+                false;
+
+            catchGameStart.textContent =
+                "START GAME →";
         }
 
-        if (catchGameTimer) catchGameTimer.textContent = "10";
-        if (catchGameScore) catchGameScore.textContent = "0 DROPLETS";
-        if (catchGameStatus) catchGameStatus.textContent = "10 seconds";
+        if (catchGameTryMe) {
+            catchGameTryMe.disabled =
+                false;
+        }
+
+        if (catchGameTimer) {
+            catchGameTimer.textContent =
+                "10";
+        }
+
+        if (catchGameScore) {
+            catchGameScore.textContent =
+                "0 DROPLETS";
+        }
+
+        if (catchGameStatus) {
+            catchGameStatus.textContent =
+                "10 seconds";
+        }
 
         setCatchGameMessage(
             "Move the bottle and catch as many droplets as you can."
@@ -1223,74 +1544,184 @@ const whatsappButton =
     const finishCatchGame = () => {
         if (!catchGameState.running) return;
 
-        catchGameState.running = false;
-        catchGameState.finished = true;
-        catchGameState.pointerActive = false;
+        catchGameState.running =
+            false;
+
+        catchGameState.finished =
+            true;
+
+        catchGameState.pointerActive =
+            false;
 
         if (catchGameState.animationFrame) {
-            cancelAnimationFrame(catchGameState.animationFrame);
-            catchGameState.animationFrame = null;
+            cancelAnimationFrame(
+                catchGameState.animationFrame
+            );
+
+            catchGameState.animationFrame =
+                null;
         }
 
         if (catchGameState.timerInterval) {
-            clearInterval(catchGameState.timerInterval);
-            catchGameState.timerInterval = null;
+            clearInterval(
+                catchGameState.timerInterval
+            );
+
+            catchGameState.timerInterval =
+                null;
         }
 
         clearCatchDrops();
-        catchGameStage?.classList.remove("is-playing");
-        catchGameStage?.classList.add("is-finished");
 
-        const name = customerName?.value.trim() || "You";
+        catchGameStage?.classList.remove(
+            "is-playing"
+        );
+
+        catchGameStage?.classList.add(
+            "is-finished"
+        );
+
+        const name =
+            customerName?.value.trim() ||
+            "You";
+
         setCatchGameMessage(
             `${name} caught ${catchGameState.score} ${catchGameState.score === 1 ? "droplet" : "droplets"}!`
         );
 
         if (catchGameStatus) {
-            catchGameStatus.textContent = "Try again when you place a new order";
+            catchGameStatus.textContent =
+                "Try again when you place a new order";
         }
 
-        if (catchGameTimer) catchGameTimer.textContent = "0";
-        if (catchGameStart) catchGameStart.disabled = true;
+        if (catchGameTimer) {
+            catchGameTimer.textContent =
+                "0";
+        }
+
+        if (catchGameStart) {
+            catchGameStart.disabled =
+                true;
+        }
+
+        if (catchGameTryMe) {
+            catchGameTryMe.disabled =
+                true;
+        }
     };
 
     const createCatchDrop = () => {
-        if (!catchGameStage || !catchGameState.running) return;
+        if (
+            !catchGameStage ||
+            !catchGameState.running
+        ) {
+            return;
+        }
 
-        const node = document.createElement("span");
-        node.className = "catch-drop";
+        const node =
+            document.createElement(
+                "span"
+            );
 
-        const width = catchGameState.stageWidth || catchGameStage.clientWidth;
-        const x = 7 + Math.random() * Math.max(10, width - 14);
-        const y = -14;
+        node.className =
+            "catch-drop";
 
-        node.style.left = `${x}px`;
-        node.style.transform = `translate3d(0, ${y}px, 0)`;
-        catchGameStage.appendChild(node);
+        const width =
+            catchGameState.stageWidth ||
+            catchGameStage.clientWidth;
+
+        const x =
+            7 +
+            Math.random() *
+            Math.max(
+                10,
+                width - 14
+            );
+
+        const y =
+            -18;
+
+        node.style.left =
+            `${x}px`;
+
+        node.style.transform =
+            `translate3d(0, ${y}px, 0)`;
+
+        catchGameStage.appendChild(
+            node
+        );
 
         catchGameState.drops.push({
             node,
             x,
             y,
-            speed: 165 + Math.random() * 95
+            speed:
+                165 +
+                Math.random() *
+                95
         });
     };
 
     const catchDropHit = (drop) => {
-        const stageWidth = catchGameState.stageWidth || catchGameStage?.clientWidth || 0;
-        const stageHeight = catchGameState.stageHeight || catchGameStage?.clientHeight || 0;
-        if (!stageWidth || !stageHeight) return false;
+        const stageWidth =
+            catchGameState.stageWidth ||
+            catchGameStage?.clientWidth ||
+            0;
 
-        const bottleCenter = (catchGameState.bottleX / 100) * stageWidth;
-        const bottleLeft = bottleCenter - (catchGameState.bottleWidth / 2);
-        const bottleRight = bottleCenter + (catchGameState.bottleWidth / 2);
-        const bottleTop = stageHeight - 9 - catchGameState.bottleHeight;
-        const bottleBottom = stageHeight - 9;
+        const stageHeight =
+            catchGameState.stageHeight ||
+            catchGameStage?.clientHeight ||
+            0;
 
-        const dropLeft = drop.x;
-        const dropRight = drop.x + 8;
-        const dropTop = drop.y;
-        const dropBottom = drop.y + 11;
+        if (
+            !stageWidth ||
+            !stageHeight
+        ) {
+            return false;
+        }
+
+        const bottleCenter =
+            (
+                catchGameState.bottleX /
+                100
+            ) * stageWidth;
+
+        const bottleLeft =
+            bottleCenter -
+            (
+                catchGameState.bottleWidth /
+                2
+            );
+
+        const bottleRight =
+            bottleCenter +
+            (
+                catchGameState.bottleWidth /
+                2
+            );
+
+        const bottleTop =
+            stageHeight -
+            9 -
+            catchGameState.bottleHeight;
+
+        const bottleBottom =
+            stageHeight -
+            9;
+
+        const dropLeft =
+            drop.x;
+
+        const dropRight =
+            drop.x +
+            catchGameState.dropWidth;
+
+        const dropTop =
+            drop.y;
+
+        const dropBottom =
+            drop.y +
+            catchGameState.dropHeight;
 
         return (
             dropRight >= bottleLeft &&
@@ -1301,157 +1732,410 @@ const whatsappButton =
     };
 
     const updateCatchGame = (timestamp) => {
-        if (!catchGameState.running || !catchGameStage) return;
-
-        if (!catchGameState.lastTime) {
-            catchGameState.lastTime = timestamp;
+        if (
+            !catchGameState.running ||
+            !catchGameStage
+        ) {
+            return;
         }
 
-        const delta = Math.min(0.032, (timestamp - catchGameState.lastTime) / 1000);
-        catchGameState.lastTime = timestamp;
-        catchGameState.spawnElapsed += delta;
+        if (!catchGameState.lastTime) {
+            catchGameState.lastTime =
+                timestamp;
+        }
+
+        const delta =
+            Math.min(
+                0.032,
+                (
+                    timestamp -
+                    catchGameState.lastTime
+                ) /
+                1000
+            );
+
+        catchGameState.lastTime =
+            timestamp;
+
+        catchGameState.spawnElapsed +=
+            delta;
 
         // Smooth bottle movement without forcing layout recalculation on every pointer event.
         catchGameState.bottleX +=
-            (catchGameState.targetBottleX - catchGameState.bottleX) * Math.min(1, delta * 24);
+            (
+                catchGameState.targetBottleX -
+                catchGameState.bottleX
+            ) *
+            Math.min(
+                1,
+                delta * 24
+            );
+
         renderCatchBottle();
 
-        if (catchGameState.spawnElapsed >= 0.24) {
-            catchGameState.spawnElapsed = 0;
+        if (
+            catchGameState.spawnElapsed >=
+            0.24
+        ) {
+            catchGameState.spawnElapsed =
+                0;
+
             createCatchDrop();
         }
 
-        const stageHeight = catchGameState.stageHeight || catchGameStage.clientHeight;
+        const stageHeight =
+            catchGameState.stageHeight ||
+            catchGameStage.clientHeight;
 
-        for (let i = catchGameState.drops.length - 1; i >= 0; i -= 1) {
-            const drop = catchGameState.drops[i];
-            drop.y += drop.speed * delta;
-            drop.node.style.transform = `translate3d(0, ${drop.y}px, 0)`;
+        for (
+            let i =
+                catchGameState.drops.length - 1;
+            i >= 0;
+            i -= 1
+        ) {
+            const drop =
+                catchGameState.drops[i];
 
-            if (catchDropHit(drop)) {
-                catchGameState.score += 1;
+            drop.y +=
+                drop.speed *
+                delta;
+
+            drop.node.style.transform =
+                `translate3d(0, ${drop.y}px, 0)`;
+
+            if (
+                catchDropHit(drop)
+            ) {
+                catchGameState.score +=
+                    1;
+
                 if (catchGameScore) {
                     catchGameScore.textContent =
                         `${catchGameState.score} ${catchGameState.score === 1 ? "DROPLET" : "DROPLETS"}`;
                 }
+
+                flashCatchBottle();
+
                 drop.node.remove();
-                catchGameState.drops.splice(i, 1);
+
+                catchGameState.drops.splice(
+                    i,
+                    1
+                );
+
                 continue;
             }
 
-            if (drop.y > stageHeight + 20) {
+            if (
+                drop.y >
+                stageHeight + 20
+            ) {
                 drop.node.remove();
-                catchGameState.drops.splice(i, 1);
+
+                catchGameState.drops.splice(
+                    i,
+                    1
+                );
             }
         }
 
-        catchGameState.animationFrame = requestAnimationFrame(updateCatchGame);
+        catchGameState.animationFrame =
+            requestAnimationFrame(
+                updateCatchGame
+            );
     };
 
     const startCatchGame = () => {
-        if (!catchGameStage || catchGameState.running) return;
+        if (
+            !catchGameStage ||
+            catchGameState.running ||
+            catchGameState.playedForCurrentOrder
+        ) {
+            return;
+        }
 
         clearCatchDrops();
+
         refreshCatchMetrics();
 
-        catchGameState.running = true;
-        catchGameState.finished = false;
-        catchGameState.score = 0;
-        catchGameState.timeLeft = 10;
-        catchGameState.lastTime = 0;
-        catchGameState.spawnElapsed = 0;
-        catchGameState.bottleX = 50;
-        catchGameState.targetBottleX = 50;
-        catchGameState.playedForCurrentOrder = true;
-        catchGameState.pointerActive = false;
+        catchGameState.running =
+            true;
 
-        catchGameStage.classList.remove("is-finished");
-        catchGameStage.classList.add("is-playing");
+        catchGameState.finished =
+            false;
 
-        if (catchGameStart) catchGameStart.disabled = true;
-        if (catchGameTimer) catchGameTimer.textContent = "10";
-        if (catchGameScore) catchGameScore.textContent = "0 DROPLETS";
-        if (catchGameStatus) catchGameStatus.textContent = "Catch them!";
-        setCatchGameMessage("");
+        catchGameState.score =
+            0;
+
+        catchGameState.timeLeft =
+            10;
+
+        catchGameState.lastTime =
+            0;
+
+        catchGameState.spawnElapsed =
+            0;
+
+        catchGameState.bottleX =
+            50;
+
+        catchGameState.targetBottleX =
+            50;
+
+        catchGameState.playedForCurrentOrder =
+            true;
+
+        catchGameState.pointerActive =
+            false;
+
+        catchGameStage.classList.remove(
+            "is-finished"
+        );
+
+        catchGameStage.classList.add(
+            "is-playing"
+        );
+
+        if (catchGameStart) {
+            catchGameStart.disabled =
+                true;
+        }
+
+        if (catchGameTryMe) {
+            catchGameTryMe.disabled =
+                true;
+        }
+
+        if (catchGameTimer) {
+            catchGameTimer.textContent =
+                "10";
+        }
+
+        if (catchGameScore) {
+            catchGameScore.textContent =
+                "0 DROPLETS";
+        }
+
+        if (catchGameStatus) {
+            catchGameStatus.textContent =
+                "Catch them!";
+        }
+
+        setCatchGameMessage(
+            ""
+        );
 
         renderCatchBottle();
-        catchGameStage.focus({ preventScroll: true });
 
-        catchGameState.timerInterval = setInterval(() => {
-            if (!catchGameState.running) return;
-            catchGameState.timeLeft -= 1;
+        catchGameStage.focus({
+            preventScroll:
+                true
+        });
 
-            if (catchGameTimer) {
-                catchGameTimer.textContent = String(Math.max(0, catchGameState.timeLeft));
-            }
+        catchGameState.timerInterval =
+            setInterval(() => {
 
-            if (catchGameState.timeLeft <= 0) {
-                finishCatchGame();
-            }
-        }, 1000);
+                if (
+                    !catchGameState.running
+                ) {
+                    return;
+                }
 
-        catchGameState.animationFrame = requestAnimationFrame(updateCatchGame);
+                catchGameState.timeLeft -=
+                    1;
+
+                if (catchGameTimer) {
+                    catchGameTimer.textContent =
+                        String(
+                            Math.max(
+                                0,
+                                catchGameState.timeLeft
+                            )
+                        );
+                }
+
+                if (
+                    catchGameState.timeLeft <=
+                    0
+                ) {
+                    finishCatchGame();
+                }
+
+            }, 1000);
+
+        catchGameState.animationFrame =
+            requestAnimationFrame(
+                updateCatchGame
+            );
     };
 
-    const moveCatchBottle = (clientX) => {
-        if (!catchGameState.running || !catchGameStage) return;
+    const moveCatchBottle = (
+        clientX
+    ) => {
 
-        const rect = catchGameStage.getBoundingClientRect();
-        const percentage = ((clientX - rect.left) / rect.width) * 100;
-        catchGameState.targetBottleX = Math.max(8, Math.min(92, percentage));
-    };
-
-    catchGameStart?.addEventListener("click", startCatchGame);
-
-    catchGameStage?.addEventListener("pointerdown", (event) => {
-        if (!catchGameState.running) return;
-        catchGameState.pointerActive = true;
-        catchGameStage.setPointerCapture?.(event.pointerId);
-        moveCatchBottle(event.clientX);
-    });
-
-    catchGameStage?.addEventListener("pointermove", (event) => {
-        if (!catchGameState.running || !catchGameState.pointerActive) return;
-        moveCatchBottle(event.clientX);
-    });
-
-    catchGameStage?.addEventListener("pointerup", (event) => {
-        catchGameState.pointerActive = false;
-        catchGameStage.releasePointerCapture?.(event.pointerId);
-    });
-
-    catchGameStage?.addEventListener("pointercancel", () => {
-        catchGameState.pointerActive = false;
-    });
-
-    catchGameStage?.addEventListener("keydown", (event) => {
-        if (!catchGameState.running) return;
-
-        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-            event.preventDefault();
-            catchGameState.targetBottleX += event.key === "ArrowLeft" ? -8 : 8;
-            catchGameState.targetBottleX = Math.max(8, Math.min(92, catchGameState.targetBottleX));
+        if (
+            !catchGameState.running ||
+            !catchGameStage
+        ) {
+            return;
         }
-    });
 
-    customerName?.addEventListener("input", () => {
-        if (catchGameState.finished) {
-            const name = customerName.value.trim() || "You";
-            setCatchGameMessage(
-                `${name} caught ${catchGameState.score} ${catchGameState.score === 1 ? "droplet" : "droplets"}!`
+        const rect =
+            catchGameStage.getBoundingClientRect();
+
+        const percentage =
+            (
+                (
+                    clientX -
+                    rect.left
+                ) /
+                rect.width
+            ) *
+            100;
+
+        catchGameState.targetBottleX =
+            Math.max(
+                8,
+                Math.min(
+                    92,
+                    percentage
+                )
+            );
+    };
+
+    catchGameStart?.addEventListener(
+        "click",
+        startCatchGame
+    );
+
+    catchGameTryMe?.addEventListener(
+        "click",
+        startCatchGame
+    );
+
+    catchGameStage?.addEventListener(
+        "pointerdown",
+        (event) => {
+
+            if (
+                !catchGameState.running
+            ) {
+                return;
+            }
+
+            catchGameState.pointerActive =
+                true;
+
+            catchGameStage.setPointerCapture?.(
+                event.pointerId
+            );
+
+            moveCatchBottle(
+                event.clientX
             );
         }
-    });
+    );
 
-    window.addEventListener("resize", () => {
-        refreshCatchMetrics();
-        renderCatchBottle();
-    });
+    catchGameStage?.addEventListener(
+        "pointermove",
+        (event) => {
+
+            if (
+                !catchGameState.running ||
+                !catchGameState.pointerActive
+            ) {
+                return;
+            }
+
+            moveCatchBottle(
+                event.clientX
+            );
+        }
+    );
+
+    catchGameStage?.addEventListener(
+        "pointerup",
+        (event) => {
+
+            catchGameState.pointerActive =
+                false;
+
+            catchGameStage.releasePointerCapture?.(
+                event.pointerId
+            );
+        }
+    );
+
+    catchGameStage?.addEventListener(
+        "pointercancel",
+        () => {
+            catchGameState.pointerActive =
+                false;
+        }
+    );
+
+    catchGameStage?.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                !catchGameState.running
+            ) {
+                return;
+            }
+
+            if (
+                event.key === "ArrowLeft" ||
+                event.key === "ArrowRight"
+            ) {
+                event.preventDefault();
+
+                catchGameState.targetBottleX +=
+                    event.key === "ArrowLeft"
+                        ? -8
+                        : 8;
+
+                catchGameState.targetBottleX =
+                    Math.max(
+                        8,
+                        Math.min(
+                            92,
+                            catchGameState.targetBottleX
+                        )
+                    );
+            }
+        }
+    );
+
+    customerName?.addEventListener(
+        "input",
+        () => {
+
+            if (
+                catchGameState.finished
+            ) {
+                const name =
+                    customerName.value.trim() ||
+                    "You";
+
+                setCatchGameMessage(
+                    `${name} caught ${catchGameState.score} ${catchGameState.score === 1 ? "droplet" : "droplets"}!`
+                );
+            }
+        }
+    );
+
+    window.addEventListener(
+        "resize",
+        () => {
+            refreshCatchMetrics();
+            renderCatchBottle();
+        }
+    );
 
     if (catchGame) {
         resetCatchGame();
     }
-
 
 
     /* =========================================================
@@ -1467,6 +2151,22 @@ const whatsappButton =
         ).toLocaleString(
             "en-NG"
         )}`;
+
+    };
+
+
+    const getProductQuantityLabel = (
+        product,
+        quantity
+    ) => {
+
+        if (
+            product.unit === "bag"
+        ) {
+            return `${quantity} ${quantity === 1 ? "bag" : "bags"}`;
+        }
+
+        return `${product.size} × ${quantity}`;
 
     };
 
@@ -1490,6 +2190,22 @@ const whatsappButton =
             },
             0
         );
+
+    };
+
+
+    const getWhatsAppQuantityLabel = (
+        product,
+        quantity
+    ) => {
+
+        if (
+            product.unit === "bag"
+        ) {
+            return `${quantity} ${quantity === 1 ? "bag" : "bags"}`;
+        }
+
+        return `${quantity}`;
 
     };
 
@@ -1647,7 +2363,7 @@ const whatsappButton =
                             </strong>
 
                             <span>
-                                ${product.size} × ${quantity}
+                                ${getProductQuantityLabel(product, quantity)}
                             </span>
                         </div>
 
@@ -2103,7 +2819,7 @@ const whatsappButton =
                                     </strong>
 
                                     <span>
-                                        ${product.size} × ${quantity}
+                                        ${getProductQuantityLabel(product, quantity)}
                                     </span>
                                 </div>
 
@@ -2181,42 +2897,45 @@ const whatsappButton =
                 "Not provided";
 
         }
+
         if (reviewCustomerBirthday) {
 
-    const day =
-        customerBirthdayDay?.value || "";
+            const day =
+                customerBirthdayDay?.value ||
+                "";
 
-    const month =
-        customerBirthdayMonth?.value || "";
+            const month =
+                customerBirthdayMonth?.value ||
+                "";
 
-    if (day && month) {
+            if (day && month) {
 
-        const monthNames = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"
-        ];
+                const monthNames = [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+                ];
 
-        reviewCustomerBirthday.textContent =
-            `${day} ${monthNames[Number(month) - 1]}`;
+                reviewCustomerBirthday.textContent =
+                    `${day} ${monthNames[Number(month) - 1]}`;
 
-    } else {
+            } else {
 
-        reviewCustomerBirthday.textContent =
-            "Not provided";
+                reviewCustomerBirthday.textContent =
+                    "Not provided";
 
-    }
+            }
 
-}
+        }
 
 
         if (reviewCustomerPhone) {
@@ -2247,36 +2966,60 @@ const whatsappButton =
         "click",
         () => {
 
-            const name = customerName?.value.trim() || "";
-const phone = customerPhone?.value.trim() || "";
-const birthdayDay = customerBirthdayDay?.value || "";
-const birthdayMonth = customerBirthdayMonth?.value || "";
+            const name =
+                customerName?.value.trim() ||
+                "";
 
-if (!name || !phone) {
-    alert("Please enter your full name and phone number.");
-    return;
-}
+            const phone =
+                customerPhone?.value.trim() ||
+                "";
 
-/*
- * Birthday is optional.
- *
- * If both are blank:
- * → continue normally.
- *
- * If the customer starts entering a birthday:
- * → require both day and month.
- */
+            const birthdayDay =
+                customerBirthdayDay?.value ||
+                "";
 
-if (
-    (birthdayDay && !birthdayMonth) ||
-    (!birthdayDay && birthdayMonth)
-) {
-    alert("Please complete your birthday or leave it blank.");
-    return;
-}
+            const birthdayMonth =
+                customerBirthdayMonth?.value ||
+                "";
 
-updateReview();
-showStep(step4, 4);
+            if (
+                !name ||
+                !phone
+            ) {
+                alert(
+                    "Please enter your full name and phone number."
+                );
+
+                return;
+            }
+
+            /*
+             * Birthday is optional.
+             *
+             * If both are blank:
+             * → continue normally.
+             *
+             * If the customer starts entering a birthday:
+             * → require both day and month.
+             */
+
+            if (
+                (birthdayDay && !birthdayMonth) ||
+                (!birthdayDay && birthdayMonth)
+            ) {
+                alert(
+                    "Please complete your birthday or leave it blank."
+                );
+
+                return;
+            }
+
+            updateReview();
+
+            showStep(
+                step4,
+                4
+            );
 
         }
     );
@@ -2297,67 +3040,67 @@ showStep(step4, 4);
     ========================================================= */
 
     const showConfirmation =
-    (backendOrder) => {
+        (backendOrder) => {
 
-        if (
-            !backendOrder ||
-            !window.MENCCOrder
-        ) {
+            if (
+                !backendOrder ||
+                !window.MENCCOrder
+            ) {
 
-            alert(
-                "Order confirmation details could not be found."
-            );
-
-            return;
-
-        }
-
-
-        if (confirmationOrderNumber) {
-
-            confirmationOrderNumber.textContent =
-                backendOrder.orderNumber ||
-                "MENCC-ORDER";
-
-        }
-
-
-        const totalNaira =
-            Number(
-                backendOrder.totalKobo ||
-                0
-            ) / 100;
-
-
-        if (confirmationTotal) {
-
-            confirmationTotal.textContent =
-                formatNaira(
-                    totalNaira
+                alert(
+                    "Order confirmation details could not be found."
                 );
 
-        }
+                return;
+
+            }
 
 
-        /* CLOSE CHECKOUT DRAWER */
+            if (confirmationOrderNumber) {
 
-        closeOrderDrawer();
+                confirmationOrderNumber.textContent =
+                    backendOrder.orderNumber ||
+                    "MENCC-ORDER";
+
+            }
 
 
-        /* SHOW SEPARATE SUCCESS PAGE */
+            const totalNaira =
+                Number(
+                    backendOrder.totalKobo ||
+                    0
+                ) / 100;
 
-        if (orderConfirmation) {
 
-            orderConfirmation.hidden =
-                false;
+            if (confirmationTotal) {
 
-            body.classList.add(
-                "order-success-open"
-            );
+                confirmationTotal.textContent =
+                    formatNaira(
+                        totalNaira
+                    );
 
-        }
+            }
 
-    };
+
+            /* CLOSE CHECKOUT DRAWER */
+
+            closeOrderDrawer();
+
+
+            /* SHOW SEPARATE SUCCESS PAGE */
+
+            if (orderConfirmation) {
+
+                orderConfirmation.hidden =
+                    false;
+
+                body.classList.add(
+                    "order-success-open"
+                );
+
+            }
+
+        };
 
 
     /* =========================================================
@@ -2416,31 +3159,31 @@ showStep(step4, 4);
 
             const orderData = {
 
-    customer: {
+                customer: {
 
-        fullName:
-            customerName?.value.trim() ||
-            "",
+                    fullName:
+                        customerName?.value.trim() ||
+                        "",
 
-        phone:
-            customerPhone?.value.trim() ||
-            "",
+                    phone:
+                        customerPhone?.value.trim() ||
+                        "",
 
-        email:
-            customerEmail?.value.trim() ||
-            "",
+                    email:
+                        customerEmail?.value.trim() ||
+                        "",
 
-        birthdayDay:
-            Number(
-                customerBirthdayDay?.value || 0
-            ),
+                    birthdayDay:
+                        Number(
+                            customerBirthdayDay?.value || 0
+                        ),
 
-        birthdayMonth:
-            Number(
-                customerBirthdayMonth?.value || 0
-            )
+                    birthdayMonth:
+                        Number(
+                            customerBirthdayMonth?.value || 0
+                        )
 
-    },
+                },
 
 
                 delivery: {
@@ -2628,7 +3371,7 @@ showStep(step4, 4);
 
                     .map(
                         (product) =>
-                            `• ${product.name} × ${quantities[product.key]}`
+                            `• ${product.name} × ${getWhatsAppQuantityLabel(product, quantities[product.key])}`
                     )
 
                     .join("\n");
@@ -2695,32 +3438,125 @@ Thank you.`;
     ========================================================= */
 
     backToReview?.addEventListener(
-    "click",
-    () => {
+        "click",
+        () => {
 
-        if (orderConfirmation) {
+            if (orderConfirmation) {
 
-            orderConfirmation.hidden =
-                true;
+                orderConfirmation.hidden =
+                    true;
+
+            }
+
+
+            body.classList.remove(
+                "order-success-open"
+            );
+
+
+            openOrderDrawer();
+
+
+            showStep(
+                step4,
+                4
+            );
 
         }
+    );
 
+
+    /* =========================================================
+       START A NEW ORDER
+    ========================================================= */
+
+    const startFreshOrder = () => {
+
+        Object.keys(
+            quantities
+        ).forEach(
+            (key) => {
+                quantities[key] =
+                    0;
+            }
+        );
+
+        selectedType =
+            "";
+
+        deliveryOptions.forEach(
+            (option) => {
+
+                option.classList.remove(
+                    "is-selected"
+                );
+
+            }
+        );
+
+        if (
+            selectedDeliveryType
+        ) {
+            selectedDeliveryType.textContent =
+                "Select a delivery type";
+        }
+
+        [
+            deliveryArea,
+            deliveryAddress,
+            deliveryNotes,
+            customerName,
+            customerPhone,
+            customerEmail,
+            customerBirthdayDay,
+            customerBirthdayMonth
+        ].forEach(
+            (field) => {
+
+                if (field) {
+                    field.value =
+                        "";
+                }
+
+            }
+        );
+
+        if (
+            orderConfirmation
+        ) {
+            orderConfirmation.hidden =
+                true;
+        }
 
         body.classList.remove(
             "order-success-open"
         );
 
+        if (
+            window.MENCCOrder
+        ) {
+            window.MENCCOrder.backendOrder =
+                null;
+        }
 
-        openOrderDrawer();
-
+        resetCatchGame();
 
         showStep(
-            step4,
-            4
+            step1,
+            1
         );
 
-    }
-);
+        updateDeliveryButton();
+
+        updateOrder();
+
+        openOrderDrawer();
+    };
+
+    startNewOrderButton?.addEventListener(
+        "click",
+        startFreshOrder
+    );
 
 
     /* =========================================================
@@ -2732,27 +3568,43 @@ Thank you.`;
     updateOrder();
 
 });
+
+
 /* =========================================================
    MENCC FOOTER — BACK TO TOP
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    const backToTop = document.querySelector(".mencc-back-top");
+        const backToTop =
+            document.querySelector(
+                ".mencc-back-top"
+            );
 
-    if (!backToTop) return;
+        if (!backToTop) return;
 
-    backToTop.addEventListener("click", () => {
+        backToTop.addEventListener(
+            "click",
+            () => {
 
-        window.scrollTo({
-            top: 0,
-            behavior: window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            ).matches
-                ? "auto"
-                : "smooth"
-        });
+                window.scrollTo(
+                    {
+                        top:
+                            0,
 
-    });
+                        behavior:
+                            window.matchMedia(
+                                "(prefers-reduced-motion: reduce)"
+                            ).matches
+                                ? "auto"
+                                : "smooth"
+                    }
+                );
 
-});
+            }
+        );
+
+    }
+);

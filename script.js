@@ -876,7 +876,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 "MENCC Signature Sachet Water",
 
             size:
-                "12 SACHETS · 1 BAG",
+                "20 SACHETS · 1 BAG",
 
             unit:
                 "bag",

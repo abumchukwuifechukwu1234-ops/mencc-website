@@ -859,10 +859,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     const prices = {
-        "sachet": 500,
-        "50cl": 400,
-        "75cl": 700,
-        "19l": 5000
+        "sachet": 449,
+        "50cl": 2599,
+        "75cl": 1999,
+        "19l": 1199
     };
 
 
@@ -876,7 +876,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 "MENCC Signature Sachet Water",
 
             size:
-                "20 SACHETS · 1 BAG",
+                "12 SACHETS · 1 BAG",
 
             unit:
                 "bag",
@@ -893,10 +893,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 "MENCC 50cl",
 
             size:
-                "50CL",
+                "20 BOTTLES · 1 PACK",
 
             unit:
-                "bottle",
+                "pack",
 
             image:
                 "assets/08-50cl-cinematic-hero.jpg"
@@ -910,10 +910,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 "MENCC 75cl",
 
             size:
-                "75CL",
+                "12 BOTTLES · 1 PACK",
 
             unit:
-                "bottle",
+                "pack",
 
             image:
                 "assets/09-75cl-cinematic-hero.jpg"
@@ -2161,9 +2161,15 @@ window.addEventListener("DOMContentLoaded", () => {
     ) => {
 
         if (
-            product.unit === "bag"
+            product.unit === "bag" ||
+            product.unit === "pack"
         ) {
-            return `${quantity} ${quantity === 1 ? "bag" : "bags"}`;
+            const label =
+                product.unit === "bag"
+                    ? (quantity === 1 ? "bag" : "bags")
+                    : (quantity === 1 ? "pack" : "packs");
+
+            return `${quantity} ${label}`;
         }
 
         return `${product.size} × ${quantity}`;
@@ -2200,9 +2206,15 @@ window.addEventListener("DOMContentLoaded", () => {
     ) => {
 
         if (
-            product.unit === "bag"
+            product.unit === "bag" ||
+            product.unit === "pack"
         ) {
-            return `${quantity} ${quantity === 1 ? "bag" : "bags"}`;
+            const label =
+                product.unit === "bag"
+                    ? (quantity === 1 ? "bag" : "bags")
+                    : (quantity === 1 ? "pack" : "packs");
+
+            return `${quantity} ${label}`;
         }
 
         return `${quantity}`;

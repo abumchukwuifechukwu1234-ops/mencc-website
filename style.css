@@ -50,16 +50,32 @@ section { position: relative; overflow: hidden; }
     transition: opacity .8s var(--ease), visibility .8s;
 }
 .page-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.loader-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.loader-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .loader-ripple, .loader-ripple::before, .loader-ripple::after {
     position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(105,215,255,.18); content: ""; transform: translate(-50%,-50%);
 }
 .loader-ripple { width: 140px; height: 140px; animation: ripple 2.6s ease-out infinite; }
 .loader-ripple::before { width: 90px; height: 90px; }
 .loader-ripple::after { width: 45px; height: 45px; }
-.loader-logo { width: 54px; color: var(--aqua-300); animation: float 1.8s ease-in-out infinite; }
-.loader-logo svg { width: 100%; height: auto; }
-.loader-brand { font-family: var(--display); font-weight: 800; letter-spacing: .16em; font-size: 28px; }
+.loader-logo {
+    width: 150px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    animation: float 2.2s ease-in-out infinite;
+}
+.loader-logo-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    /* Blend the white image background into the loader's navy background,
+       while keeping the MENCC droplet mark visibly black. */
+    mix-blend-mode: multiply;
+    opacity: .96;
+    filter: drop-shadow(0 12px 26px rgba(105,215,255,.12));
+}
 .loader-line { width: 90px; height: 1px; background: rgba(255,255,255,.15); overflow: hidden; }
 .loader-line span { display: block; width: 45%; height: 100%; background: var(--aqua-500); animation: loadline 1.5s var(--ease) infinite; }
 .loader-tagline { font-size: 9px; letter-spacing: .24em; color: rgba(255,255,255,.55); }

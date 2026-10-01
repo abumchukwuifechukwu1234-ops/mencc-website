@@ -6727,3 +6727,67 @@ html[data-theme="dark"] .trust-modal-bottom {
         padding-top: 52px;
     }
 }
+
+
+/* =========================================================
+   MENCC — PRODUCT IMAGE LABELS
+   Keep quantity badges readable in dark mode and away from
+   the typography already built into the product artwork.
+========================================================= */
+.image-tag {
+    left: auto !important;
+    right: 15px !important;
+    top: 15px !important;
+    z-index: 5 !important;
+    padding: 9px 12px !important;
+    background: rgba(255, 255, 255, .97) !important;
+    color: #061a36 !important;
+    border: 1px solid rgba(6, 26, 54, .12) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .16) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    white-space: nowrap !important;
+}
+
+.image-tag.featured {
+    background: #8fe8ff !important;
+    color: #061a36 !important;
+    border-color: rgba(6, 26, 54, .14) !important;
+}
+
+/* Keep the 19L quantity label in the top-left corner. */
+.product-card-wide .image-tag {
+    left: 15px !important;
+    right: auto !important;
+    top: 15px !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+/* Dark mode: maximum contrast without changing the artwork. */
+html[data-theme="dark"] .image-tag,
+html[data-theme="dark"] .image-tag.featured,
+html[data-theme="dark"] .sachet-tag {
+    background: rgba(248, 252, 255, .98) !important;
+    color: #061a36 !important;
+    border-color: rgba(143, 216, 255, .34) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .34) !important;
+}
+
+@media (max-width: 600px) {
+    .image-tag {
+        right: 12px !important;
+        top: 12px !important;
+        padding: 8px 11px !important;
+        font-size: 8px !important;
+        letter-spacing: .13em !important;
+    }
+
+    .product-card-wide .image-tag {
+        left: 12px !important;
+        right: auto !important;
+        top: 12px !important;
+        bottom: auto !important;
+        transform: none !important;
+    }
+}

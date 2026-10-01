@@ -6915,8 +6915,11 @@ html[data-theme="dark"] .sachet-tag {
 
     .product-card-tall .image-tag,
     .product-card-featured .image-tag {
-        top: 10px !important;
-        right: 10px !important;
+        top: 4px !important;
+        right: 6px !important;
+        padding: 6px 8px !important;
+        font-size: 6.7px !important;
+        letter-spacing: .095em !important;
     }
 
     .product-card-wide .image-tag {

@@ -6731,22 +6731,23 @@ html[data-theme="dark"] .trust-modal-bottom {
 
 /* =========================================================
    MENCC — PRODUCT IMAGE LABELS
-   Keep quantity badges readable in dark mode and away from
-   the typography already built into the product artwork.
+   Quantity badges stay readable without covering important
+   typography or product details inside the artwork.
 ========================================================= */
 .image-tag {
     left: auto !important;
     right: 15px !important;
     top: 15px !important;
     z-index: 5 !important;
-    padding: 9px 12px !important;
-    background: rgba(255, 255, 255, .97) !important;
+    padding: 8px 11px !important;
+    background: rgba(248, 252, 255, .97) !important;
     color: #061a36 !important;
     border: 1px solid rgba(6, 26, 54, .12) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .16) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .16) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     white-space: nowrap !important;
+    line-height: 1 !important;
 }
 
 .image-tag.featured {
@@ -6755,13 +6756,24 @@ html[data-theme="dark"] .trust-modal-bottom {
     border-color: rgba(6, 26, 54, .14) !important;
 }
 
-/* Keep the 19L quantity label in the top-left corner. */
+/* 19L: the artwork already has MENCC branding in the upper-left,
+   so keep the small badge in the upper-right safe area instead. */
 .product-card-wide .image-tag {
-    left: 15px !important;
-    right: auto !important;
+    left: auto !important;
+    right: 15px !important;
     top: 15px !important;
     bottom: auto !important;
     transform: none !important;
+}
+
+/* Keep 50cl/75cl badges compact so they don't cover the bottle neck. */
+.product-card-tall .image-tag,
+.product-card-featured .image-tag {
+    right: 15px !important;
+    top: 15px !important;
+    padding: 7px 10px !important;
+    font-size: 8px !important;
+    letter-spacing: .12em !important;
 }
 
 /* Dark mode: maximum contrast without changing the artwork. */
@@ -6774,20 +6786,141 @@ html[data-theme="dark"] .sachet-tag {
     box-shadow: 0 10px 28px rgba(0, 0, 0, .34) !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     .image-tag {
         right: 12px !important;
         top: 12px !important;
-        padding: 8px 11px !important;
+        padding: 7px 10px !important;
         font-size: 8px !important;
-        letter-spacing: .13em !important;
+        letter-spacing: .11em !important;
+    }
+
+    .product-card-wide .image-tag {
+        right: 12px !important;
+        top: 12px !important;
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .image-tag {
+        right: 10px !important;
+        top: 10px !important;
+        padding: 7px 9px !important;
+        font-size: 7px !important;
+        letter-spacing: .10em !important;
+        max-width: calc(100% - 20px) !important;
+    }
+
+    .product-card-wide .image-tag {
+        right: 10px !important;
+        top: 10px !important;
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+    }
+}
+
+/* =========================================================
+   MENCC — RESPONSIVE PRODUCT IMAGE BADGES
+   Keep quantity labels inside clear artwork areas without
+   covering the product photography or built-in typography.
+========================================================= */
+
+.product-image {
+    position: relative;
+}
+
+.image-tag {
+    position: absolute !important;
+    z-index: 6 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: max-content !important;
+    max-width: calc(100% - 24px) !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 8px 11px !important;
+    border-radius: 999px !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+    font-size: clamp(7px, 0.62vw, 9px) !important;
+    letter-spacing: .13em !important;
+    box-sizing: border-box !important;
+}
+
+/* 50cl: clear upper-right sky area. */
+.product-card-tall .image-tag {
+    top: 14px !important;
+    right: 14px !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+/* 75cl: same safe upper-right area, kept compact so the bottle remains clear. */
+.product-card-featured .image-tag {
+    top: 14px !important;
+    right: 14px !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+/* 19L: upper-left is the cleanest area in this artwork.
+   Keep the badge above the built-in MENCC artwork rather than
+   placing it across the bottle or center composition. */
+.product-card-wide .image-tag {
+    top: 14px !important;
+    left: 14px !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+@media (max-width: 900px) {
+    .image-tag {
+        padding: 7px 10px !important;
+        font-size: 7.5px !important;
+        letter-spacing: .12em !important;
+    }
+
+    .product-card-tall .image-tag,
+    .product-card-featured .image-tag,
+    .product-card-wide .image-tag {
+        top: 12px !important;
+    }
+
+    .product-card-tall .image-tag,
+    .product-card-featured .image-tag {
+        right: 12px !important;
     }
 
     .product-card-wide .image-tag {
         left: 12px !important;
-        right: auto !important;
-        top: 12px !important;
-        bottom: auto !important;
-        transform: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .image-tag {
+        max-width: calc(100% - 20px) !important;
+        padding: 6px 9px !important;
+        font-size: 7px !important;
+        letter-spacing: .10em !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .14) !important;
+    }
+
+    .product-card-tall .image-tag,
+    .product-card-featured .image-tag {
+        top: 10px !important;
+        right: 10px !important;
+    }
+
+    .product-card-wide .image-tag {
+        top: 10px !important;
+        left: 10px !important;
     }
 }
